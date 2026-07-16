@@ -1,0 +1,16 @@
+Codigo,Tipologia,Sector,C1,C2,C3,C4,C5,C6
+T1,O&M predictivo para parques solares y eólicos,Energía,78,60,72,80,78,75
+T2,Microrredes con gestión inteligente de demanda,Energía/agua,75,65,80,58,60,60
+T3,Desalinización renovable con gestión hídrica,Energía/agua,70,78,82,45,50,45
+T4,Orquestador de gestión hídrica comunitaria,Energía/agua,62,88,70,70,72,68
+T5,Torre de control logística con cadena de frío,Logística,72,62,60,62,70,66
+T6,Consolidador inteligente de carga regional,Logística,68,60,64,60,72,62
+T7,Pesca y acuicultura artesanal inteligente,Agro-pesca,64,82,68,55,62,55
+T8,Agricultura de precisión para zonas áridas,Agro-pesca,60,70,75,52,66,54
+T9,Capacidad de carga turística y destino inteligente,Turismo,70,72,85,60,66,64
+T10,Revenue management para turismo comunitario,Turismo,72,75,66,64,72,70
+T11,Guía cultural conversacional español/wayuunaiki,Turismo,58,80,60,66,74,64
+T12,Clasificación de residuos y simbiosis industrial,Economía circular,66,66,84,56,60,56
+T13,Valorización inteligente de residuos orgánicos,Economía circular,60,64,80,54,58,54
+T14,Trazabilidad con blockchain para artesanía Wayuu,Manuf./artesanías,70,86,64,62,70,66
+T15,Priorizador de inversión pública (multicriterio),Servicios digitales,58,68,64,72,70,66

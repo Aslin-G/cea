@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "Si utiliza este material, cite el artículo asociado."
+type: dataset
+title: "Reproducibilidad: priorización multicriterio de un portafolio de negocios basados en inteligencia artificial para la diversificación económica de La Guajira (Colombia)"
+version: 1.0.0
+date-released: "2026-07-16"
+license: MIT
+authors:
+  - family-names: "Botello Plata"
+    given-names: "Aslin Gonzalo"
+    affiliation: "Universidad de La Guajira"
+    orcid: "https://orcid.org/0000-0002-6093-9752"
+  - family-names: "Daza Bolaño"
+    given-names: "Rosa Delfina"
+    affiliation: "Universidad de La Guajira"
+    orcid: "https://orcid.org/0009-0004-1165-543X"
+  - family-names: "Cuesta Gómez"
+    given-names: "Mercedes Matilde"
+    affiliation: "Universidad de La Guajira"
+    orcid: "https://orcid.org/0000-0001-6606-681X"
+keywords:
+  - análisis de decisión multicriterio
+  - AHP
+  - TOPSIS
+  - VIKOR
+  - simulación de Monte Carlo
+  - diversificación económica
+  - La Guajira
+  - transición justa
+preferred-citation:
+  type: article
+  title: "Priorización multicriterio de un portafolio de negocios basados en inteligencia artificial para la diversificación económica de La Guajira (Colombia)"
+  journal: "Revista CEA"
+  year: 2026
+  notes: "Manuscrito en evaluación, código 4047"
+  authors:
+    - family-names: "Botello Plata"
+      given-names: "Aslin Gonzalo"
+    - family-names: "Daza Bolaño"
+      given-names: "Rosa Delfina"
+    - family-names: "Cuesta Gómez"
+      given-names: "Mercedes Matilde"

@@ -1,0 +1,202 @@
+{
+ "international": {
+  "renew_elec_col": 75.1,
+  "renew_elec_world_median": 26.5,
+  "renew_elec_percentile": 85.7,
+  "internet_col": 72.8,
+  "internet_year": "2022",
+  "internet_world_median": 77.0,
+  "internet_percentile": 42.8,
+  "col_arrivals_2019": 4.53,
+  "ai_indicator": "E_AI_TANY",
+  "ai_eu_2024": 13.5,
+  "ai_top": [
+   {
+    "pais": "DK",
+    "pc": 27.6
+   },
+   {
+    "pais": "SE",
+    "pc": 25.1
+   },
+   {
+    "pais": "BE",
+    "pc": 24.7
+   },
+   {
+    "pais": "FI",
+    "pc": 24.4
+   },
+   {
+    "pais": "LU",
+    "pc": 23.7
+   },
+   {
+    "pais": "NL",
+    "pc": 23.1
+   }
+  ]
+ },
+ "national": {
+  "fncer_total_mw": 9878.6,
+  "fncer_projects": 286,
+  "fncer_guajira_mw": 1605.3,
+  "fncer_guajira_share": 16.3,
+  "fncer_gini": 0.655,
+  "fncer_hhi": 0.139,
+  "upme_total_mw": 9112.9,
+  "upme_guajira_mw": 985.9,
+  "upme_guajira_share": 10.8,
+  "upme_delta_mw": -885.6,
+  "rnt_active_total": 686967,
+  "rnt_guajira": 6821,
+  "rnt_guajira_share": 0.99,
+  "rues_guajira": 13125,
+  "micro_share": 96.8,
+  "ipm_guajira_2025": 40.1,
+  "ipm_rank": 4,
+  "ipm_dep_count": 33,
+  "ipm_guajira_rural_gap": 41.5
+ },
+ "local": {
+  "guajira_upme_mix": {
+   "SOLAR": 835.9,
+   "EÓLICO": 150.0
+  },
+  "riohacha_year": 2026,
+  "riohacha_active": 473,
+  "riohacha_cat_hhi": 0.256,
+  "riohacha_slope": 42.8,
+  "riohacha_r2": 0.868,
+  "riohacha_cagr": 0.116,
+  "riohacha_beds_median": 12.0,
+  "riohacha_beds_p90": 36.400000000000034,
+  "guajira_emp_total": 13125,
+  "riohacha_emp": 5047,
+  "emp_hhi_muni": 0.251,
+  "nbi_top": [
+   {
+    "mun": "Uribia",
+    "nbi": 88.7,
+    "rural": 89.5
+   },
+   {
+    "mun": "Manaure",
+    "nbi": 81.1,
+    "rural": 80.6
+   },
+   {
+    "mun": "Maicao",
+    "nbi": 59.2,
+    "rural": 81.2
+   },
+   {
+    "mun": "Dibulla",
+    "nbi": 55.4,
+    "rural": 58.5
+   },
+   {
+    "mun": "Barrancas",
+    "nbi": 40.6,
+    "rural": 50.9
+   },
+   {
+    "mun": "Albania",
+    "nbi": 38.1,
+    "rural": 66.9
+   }
+  ],
+  "ipm_deprivations": [
+   {
+    "priv": "Trabajo informal",
+    "val": 90.6
+   },
+   {
+    "priv": "Bajo logro educativo",
+    "val": 56.8
+   },
+   {
+    "priv": "Inadecuada eliminación de excretas",
+    "val": 47.9
+   },
+   {
+    "priv": "Sin acceso a fuente de agua mejorada",
+    "val": 45.3
+   },
+   {
+    "priv": "Material inadecuado de pisos",
+    "val": 37.5
+   },
+   {
+    "priv": "Rezago escolar",
+    "val": 32.9
+   },
+   {
+    "priv": "Analfabetismo",
+    "val": 22.1
+   },
+   {
+    "priv": "Hacinamiento crítico",
+    "val": 18.7
+   }
+  ],
+  "mcda_top": [
+   {
+    "cod": "T1",
+    "base": 72.8,
+    "p_top1": 60.6,
+    "p_top3": 98.0,
+    "p_top5": 99.9
+   },
+   {
+    "cod": "T4",
+    "base": 72.4,
+    "p_top1": 39.2,
+    "p_top3": 99.7,
+    "p_top5": 100.0
+   },
+   {
+    "cod": "T14",
+    "base": 70.7,
+    "p_top1": 0.0,
+    "p_top3": 66.0,
+    "p_top5": 99.8
+   },
+   {
+    "cod": "T10",
+    "base": 70.2,
+    "p_top1": 0.0,
+    "p_top3": 14.5,
+    "p_top5": 100.0
+   },
+   {
+    "cod": "T9",
+    "base": 69.9,
+    "p_top1": 0.1,
+    "p_top3": 21.8,
+    "p_top5": 97.9
+   },
+   {
+    "cod": "T11",
+    "base": 67.3,
+    "p_top1": 0.0,
+    "p_top3": 0.0,
+    "p_top5": 2.1
+   },
+   {
+    "cod": "T2",
+    "base": 66.7,
+    "p_top1": 0.0,
+    "p_top3": 0.0,
+    "p_top5": 0.2
+   },
+   {
+    "cod": "T15",
+    "base": 66.0,
+    "p_top1": 0.0,
+    "p_top3": 0.0,
+    "p_top5": 0.0
+   }
+  ]
+ }
+}

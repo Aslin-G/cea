@@ -1,0 +1,7 @@
+Criterio,Nombre,C1,C2,C3,C4,C5,C6,Prioridad_autovector
+C1,Economico-productivo,1,0.5,1,2,2,1,0.1793
+C2,Social y transicion justa,2,1,1,2,2,1,0.2254
+C3,Ambiental,1,1,1,2,1,0.5,0.1643
+C4,Tecnico,0.5,0.5,0.5,1,2,1,0.1314
+C5,Regulatorio-licenciamiento,0.5,0.5,1,0.5,1,1,0.1157
+C6,Financiero y de riesgo,1,1,2,1,1,1,0.1840

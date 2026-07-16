@@ -1,0 +1,104 @@
+archivo,extension,tamano_mb,sha256_12,estado_lectura,filas,columnas,hojas,cabecera_o_hoja
+.DS_Store,,0.006,cefc13636467,no tabular,,,,
+70 ideas basadas en IA.docx,.docx,0.034,5237685959bb,documento/proyecto,,,,
+AGENTS.md,.md,0.0,bc1d72dcc1e7,documento/proyecto,,,,
+Base de datos nvestigación portafolio de negocios 4.0/17-07-2025-OEE-DV-ESTADISTICAS-EMPRESAS-RUES-MINCIT.xlsx,.xlsx,5.664,43925610fd65,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/29-05-2026-OEE-EC-ESTADISTICAS-TURISMO-MINCIT.xlsx,.xlsx,7.485,7dc7b69c2e01,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_EG.ELC.RNEW.ZS_DS2_en_excel_v2_276813 (1).xls,.xls,0.248,a927eec1e6a2,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_EG.ELC.RNEW.ZS_DS2_en_excel_v2_276813.xls,.xls,0.248,a927eec1e6a2,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_EG.FEC.RNEW.ZS_DS2_en_excel_v2_267583.xls,.xls,0.194,65fabad2a6eb,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_IT.NET.BBND.P2_DS2_en_excel_v2_260048.xls,.xls,0.216,b8ea9a8f02a6,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_IT.NET.USER.ZS_DS2_en_excel_v2_115661 (1).xls,.xls,0.223,7880b5d98219,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_IT.NET.USER.ZS_DS2_en_excel_v2_115661 (2).xls,.xls,0.223,7880b5d98219,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_IT.NET.USER.ZS_DS2_en_excel_v2_115661.xls,.xls,0.223,7880b5d98219,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_ST.INT.ARVL_DS2_en_excel_v2_279278.xls,.xls,0.18,de5ad498bb9c,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/API_ST.INT.RCPT.CD_DS2_en_excel_v2_266126.xls,.xls,0.198,9c9428e60e15,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/CNPV-2018-NBI-DIVIPOLA-2021.xlsx,.xlsx,0.412,0e6f1737c09b,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/CNPV-2018-NBI.xlsx,.xlsx,0.423,96775308d340,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/CNPV-2018-VIHOPE-v3.xls,.xls,0.736,32bdeb24e469,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/CoCObservatoryData (1).xlsx,.xlsx,0.095,dfd944d4935c,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/CoCObservatoryData (2).xlsx,.xlsx,0.095,dfd944d4935c,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/CoCObservatoryData.xlsx,.xlsx,0.095,dfd944d4935c,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/DANE_DIRECTORIO_ESTADISTICO_EMPRESAS.xlsx,.xlsx,78.476,fe72ebe47792,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/EMP_NIFL_SEX_ECO_NB_Q-20260603T2116.csv,.csv,54.987,de937b8e4858,"texto utf-8-sig delim=','",no contado; archivo grande,11,,ref_area.label; source.label; indicator.label; sex.label; classif1.label; time; obs_value; obs_status.label
+Base de datos nvestigación portafolio de negocios 4.0/EMP_TOUR_SEX_ECO_NB_A-20260603T2030.csv,.csv,2.764,6e97b1fdb734,"texto utf-8-sig delim=','",no contado; archivo grande,11,,ref_area.label; source.label; indicator.label; sex.label; classif1.label; time; obs_value; obs_status.label
+Base de datos nvestigación portafolio de negocios 4.0/EMP_TOUR_SEX_ECO_NB_A-20260603T2116.csv,.csv,2.764,6e97b1fdb734,"texto utf-8-sig delim=','",no contado; archivo grande,11,,ref_area.label; source.label; indicator.label; sex.label; classif1.label; time; obs_value; obs_status.label
+Base de datos nvestigación portafolio de negocios 4.0/EMP_TPIF_SEX_NB_A-20260603T2030.csv,.csv,0.17,0ff663f09ee1,"texto utf-8-sig delim=','",no contado; archivo grande,9,,ref_area.label; source.label; indicator.label; sex.label; time; obs_value; obs_status.label; note_indicator.label
+Base de datos nvestigación portafolio de negocios 4.0/EMP_TPIF_SEX_NB_A-20260603T2116.csv,.csv,0.17,0ff663f09ee1,"texto utf-8-sig delim=','",no contado; archivo grande,9,,ref_area.label; source.label; indicator.label; sex.label; time; obs_value; obs_status.label; note_indicator.label
+Base de datos nvestigación portafolio de negocios 4.0/Empresas_de_Turismo_Distrito_Riohacha.csv,.csv,0.344,430c42f27843,"texto utf-8-sig delim=','",no contado; archivo grande,13,,ANO; CODIGO_RNT; COD_MUN; COD_DPTO; ESTADO_RNT; RAZON_SOCIAL_ESTABLECIMIENTO; DEPARTAMENTO; MUNICIPIO
+Base de datos nvestigación portafolio de negocios 4.0/Estructura_empresarial_seg_n_municipio_y_tama_o_de_empresa.csv,.csv,0.012,573348b6c19e,"texto utf-8-sig delim=','",no contado; archivo grande,10,,AÑO; Municipio; N° Empresas Micro; N° Empresas Pequeña; N° Empresas Mediana; N° Empresas Grande; Activos Micro; Activos Pequeña
+Base de datos nvestigación portafolio de negocios 4.0/FNCER.csv,.csv,0.033,f0553b1c306b,"texto utf-8-sig delim=','",no contado; archivo grande,12,,DS_ESTADO; DS_PROYECTO; DS_PROMOTOR; DS_DEPARTAMENTO; DS_MUNICIPIO; BK_TIEMPO; DS_TIPO_ENERGIA; VL_CAPACIDAD
+Base de datos nvestigación portafolio de negocios 4.0/FixedBroadbandSubscriptions_2000-2020.xlsx,.xlsx,0.22,46b4915d4a71,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/HOGARES_Cuadros_CNPV_2018.XLSX,.xlsx,0.931,ff7754daa56c,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IDIDataset2024edition (1).xlsx,.xlsx,0.123,8e07eddcebc6,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IDIDataset2024edition (2).xlsx,.xlsx,0.123,8e07eddcebc6,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IDIDataset2024edition.xlsx,.xlsx,0.123,8e07eddcebc6,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IRENA_OFGStats_Extract_2024 (1).xlsx,.xlsx,3.461,0766f5c098ee,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IRENA_OFGStats_Extract_2024.xlsx,.xlsx,3.461,0766f5c098ee,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IRENA_TSSC_Solar_PV_Manufacturing_Cost_Model_v1 (1).xlsx,.xlsx,1.538,41bc35f04222,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IRENA_TSSC_Solar_PV_Manufacturing_Cost_Model_v1.xlsx,.xlsx,1.538,41bc35f04222,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/ITU_regional_global_Key_ICT_indicator_aggregates_Nov_2025 (1).xlsx,.xlsx,0.105,1c36533d48ea,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/ITU_regional_global_Key_ICT_indicator_aggregates_Nov_2025.xlsx,.xlsx,0.105,1c36533d48ea,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IndividualsUsingInternetByGender_Jan2025 (1).xlsx,.xlsx,0.046,9d25dfbc34e4,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/IndividualsUsingInternetByGender_Jan2025.xlsx,.xlsx,0.046,9d25dfbc34e4,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/Informe_registros_activos_de_proyectos_generacion_electrica_abril_2026.xlsx,.xlsx,0.063,3e516a207ee2,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/Informe_registros_activos_de_proyectos_generacion_electrica_enero_2026.xlsx,.xlsx,0.048,be8a6a7e86fb,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+"Base de datos nvestigación portafolio de negocios 4.0/OECD.CFE.TOU,DSD_TOURISM_ENT_EMP@DF_ENT_EMP,1.0+all (1).csv",.csv,1.628,6c8bc21721ec,"texto utf-8-sig delim=','",no contado; archivo grande,22,,STRUCTURE; STRUCTURE_ID; STRUCTURE_NAME; ACTION; REF_AREA; ; MEASURE; 
+"Base de datos nvestigación portafolio de negocios 4.0/OECD.CFE.TOU,DSD_TOURISM_ENT_EMP@DF_ENT_EMP,1.0+all.csv",.csv,1.628,6c8bc21721ec,"texto utf-8-sig delim=','",no contado; archivo grande,22,,STRUCTURE; STRUCTURE_ID; STRUCTURE_NAME; ACTION; REF_AREA; ; MEASURE; 
+"Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_B@DF_BUSINESSES,1.0+all (1).csv",.csv,27.294,349ff089f6f7,"texto utf-8-sig delim=','",no contado; archivo grande,34,,STRUCTURE; STRUCTURE_ID; STRUCTURE_NAME; ACTION; REF_AREA; ; FREQ; 
+"Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_B@DF_BUSINESSES,1.0+all (2).csv",.csv,27.294,349ff089f6f7,"texto utf-8-sig delim=','",no contado; archivo grande,34,,STRUCTURE; STRUCTURE_ID; STRUCTURE_NAME; ACTION; REF_AREA; ; FREQ; 
+"Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_B@DF_BUSINESSES,1.0+all.csv",.csv,27.294,349ff089f6f7,"texto utf-8-sig delim=','",no contado; archivo grande,34,,STRUCTURE; STRUCTURE_ID; STRUCTURE_NAME; ACTION; REF_AREA; ; FREQ; 
+"Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_HH_IND@DF_HH,1.0+all (1).csv",.csv,2.849,d6445f3b60c5,"texto utf-8-sig delim=','",no contado; archivo grande,42,,STRUCTURE; STRUCTURE_ID; STRUCTURE_NAME; ACTION; REF_AREA; ; FREQ; 
+"Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_HH_IND@DF_HH,1.0+all.csv",.csv,2.849,d6445f3b60c5,"texto utf-8-sig delim=','",no contado; archivo grande,42,,STRUCTURE; STRUCTURE_ID; STRUCTURE_NAME; ACTION; REF_AREA; ; FREQ; 
+Base de datos nvestigación portafolio de negocios 4.0/Registro_Nacional_de_Turismo_-_RNT.csv,.csv,92.001,53bcbbcd1569,"texto utf-8-sig delim=','",no contado; archivo grande,14,,CODIGO_RNT; ESTADO_RNT; RAZON_SOCIAL_ESTABLECIMIENTO; DEPARTAMENTO; CODIGO_DEPARTAMENTO; MUNICIPIO; CODIGO_MUNICIPIO; NIT
+Base de datos nvestigación portafolio de negocios 4.0/SDG_0861_SEX_RT_A-20260603T2116.csv,.csv,2.702,39a5d4b24cad,"texto utf-8-sig delim=','",no contado; archivo grande,9,,ref_area.label; source.label; indicator.label; sex.label; time; obs_value; obs_status.label; note_indicator.label
+Base de datos nvestigación portafolio de negocios 4.0/Tablero_informativo_sobre_informe_registros_activos_abril_2026.xlsx,.xlsx,0.164,56a2494ab1b2,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/VIVIENDAS_Cuadros_CNPV_2018.XLSX,.xlsx,8.017,40e6803de3e6,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-ECV-2025.xlsx,.xlsx,2.436,c30823603d8e,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-EMA-Desestacionalizado-mar2026.xlsx,.xlsx,0.064,fabc6a25b586,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-EMA-mar2026.xlsx,.xlsx,1.673,d9f1cbdffdc5,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-ENTICHogares-2024.xlsx,.xlsx,3.942,8831f5067dd9,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHDepartamentos-2025 (1).xls,.xls,1.174,ed0686487bbf,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHDepartamentos-2025 (2).xls,.xls,1.174,ed0686487bbf,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHDepartamentos-2025 (3).xls,.xls,1.174,ed0686487bbf,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHDepartamentos-2025.xls,.xls,1.174,ed0686487bbf,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHEISS-ene-mar2026.xlsx,.xlsx,1.458,385a0f40e07c,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-PMultidimensional-2025.xlsx,.xlsx,0.429,c8ce1c3e7225,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anex-PMultidimensional-Departamental-2025.xlsx,.xlsx,0.46,8530b05602db,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anexo-censal-pobreza-municipal-2018.xlsx,.xlsx,2.96,98efc6de3bb9,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/anexo-directorio-estadistico-empresas-2019-2021.xlsx,.xlsx,0.139,2f321ad51e24,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/articles-383104_recurso_02.xlsx,.xlsx,0.016,5cae2245b06b,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/articles-396291_recurso_16.xlsx,.xlsx,0.18,99ee2378cd76,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/articles-396294_recurso_14.xlsx,.xlsx,0.338,0e38e15b720b,xlsx: inventario liviano; lectura profunda solo en analisis focal,,,,
+Base de datos nvestigación portafolio de negocios 4.0/deep-research-report-2.md,.md,0.024,c057bf313ce9,documento/proyecto,,,,
+Base de datos nvestigación portafolio de negocios 4.0/deep-research-report-3.md,.md,0.017,ae21b816b6c6,documento/proyecto,,,,
+Base de datos nvestigación portafolio de negocios 4.0/deep-research-report.md,.md,0.011,abb3f1feaf3d,documento/proyecto,,,,
+Base de datos nvestigación portafolio de negocios 4.0/estat_isoc_eb_ai.tsv,.tsv,1.65,1216620fab07,"texto utf-8-sig delim=','",no contado; archivo grande,6,,freq; size_emp; nace_r2; indic_is; unit; geo\TIME_PERIOD	2021 	2023 	2024 	2025 
+Base de datos nvestigación portafolio de negocios 4.0/estat_isoc_eb_ai.tsv.gz,.tsv.gz,0.258,7971a9c99016,"texto utf-8-sig delim=','",no contado; archivo grande,6,,freq; size_emp; nace_r2; indic_is; unit; geo\TIME_PERIOD	2021 	2023 	2024 	2025 
+Base de datos nvestigación portafolio de negocios 4.0/estat_isoc_eb_ain2.tsv.gz,.tsv.gz,2.041,ec6920ef1f6a,"texto utf-8-sig delim=','",no contado; archivo grande,6,,freq; size_emp; nace_r2; indic_is; unit; geo\TIME_PERIOD	2021 	2023 	2024 	2025 
+Base de datos nvestigación portafolio de negocios 4.0/estat_nrg_ind_ren_en.csv.gz,.csv.gz,0.022,025fb626d823,"texto utf-8-sig delim=','",no contado; archivo grande,10,,DATAFLOW; LAST UPDATE; freq; nrg_bal; unit; geo; TIME_PERIOD; OBS_VALUE
+Base de datos nvestigación portafolio de negocios 4.0/international-tourist-trips (1).csv,.csv,0.131,778f32082be1,"texto utf-8-sig delim=','",no contado; archivo grande,4,,Entity; Code; Year; Arrivals of tourists from abroad
+Base de datos nvestigación portafolio de negocios 4.0/international-tourist-trips (2).csv,.csv,0.131,778f32082be1,"texto utf-8-sig delim=','",no contado; archivo grande,4,,Entity; Code; Year; Arrivals of tourists from abroad
+Base de datos nvestigación portafolio de negocios 4.0/international-tourist-trips (3).csv,.csv,0.131,778f32082be1,"texto utf-8-sig delim=','",no contado; archivo grande,4,,Entity; Code; Year; Arrivals of tourists from abroad
+Base de datos nvestigación portafolio de negocios 4.0/international-tourist-trips.csv,.csv,0.131,778f32082be1,"texto utf-8-sig delim=','",no contado; archivo grande,4,,Entity; Code; Year; Arrivals of tourists from abroad
+Base de datos nvestigación portafolio de negocios 4.0/worldbank_broadband_subscriptions.xls,.xls,0.216,b8ea9a8f02a6,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/worldbank_internet_users.xls,.xls,0.223,7880b5d98219,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/worldbank_tourist_arrivals.xls,.xls,0.18,de5ad498bb9c,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Base de datos nvestigación portafolio de negocios 4.0/worldbank_tourist_receipts.xls,.xls,0.198,9c9428e60e15,xls binario: requiere xlrd/LibreOffice/Excel para lectura tabular,,,,
+Cap5_Portafolio_IA_La_Guajira.docx,.docx,0.135,afa4d31c3463,documento/proyecto,,,,
+Caps1-4_Portafolio_IA_La_Guajira.docx,.docx,0.027,99c083f12fe0,documento/proyecto,,,,
+Caps6-8_Portafolio_IA_La_Guajira.docx,.docx,0.092,412215050436,documento/proyecto,,,,
+Eco-Circular/Ideas - economía circular.docx,.docx,0.015,e5eff96461f9,documento/proyecto,,,,
+Ideas - Agua.docx,.docx,0.014,baf7a891c28b,documento/proyecto,,,,
+Ideas finales.docx,.docx,0.026,2577309b2daf,documento/proyecto,,,,
+Informe_Final_Portafolio_IA_La_Guajira.docx,.docx,0.237,f416453fb6fe,documento/proyecto,,,,
+Logística y negocios portuarios/Ideas - Logística.docx,.docx,0.014,168ff4b3f0c4,documento/proyecto,,,,
+Proyecto investigación aprobado.pdf,.pdf,1.838,ba366ecc7ba3,documento/proyecto,,,,
+Turismo /Ideas - turismo.docx,.docx,0.015,79057cdda884,documento/proyecto,,,,
+analysis_outputs/ANALISIS_ESTADISTICO_AVANZADO_PORTAFOLIO_IA_LA_GUAJIRA.md,.md,0.015,e7d6aa698841,documento/proyecto,,,,
+analysis_outputs/grafico_mcda_prob_top5.svg,.svg,0.003,d25a490851f5,no tabular,,,,
+analysis_outputs/grafico_turismo_riohacha_tendencia.svg,.svg,0.002,4f9274e5360c,no tabular,,,,
+analysis_outputs/grafico_upme_capacidad_departamentos.svg,.svg,0.002,53fbf1f77211,no tabular,,,,
+analysis_outputs/inventario_bases_datos.csv,.csv,0.018,b40816da5b59,"texto utf-8-sig delim=','",no contado; archivo grande,9,,archivo; extension; tamano_mb; sha256_12; estado_lectura; filas; columnas; hojas
+analysis_outputs/metricas_clave_analisis.json,.json,0.049,23e3a127fbc4,no tabular,,,,
+analysis_outputs/run_statistical_analysis.py,.py,0.056,2876a2aff730,no tabular,,,,
