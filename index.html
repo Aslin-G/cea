@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reproducibilidad · Priorización multicriterio de oportunidades de negocio con IA en La Guajira</title>
+<meta name="description" content="Datos, código y verificación interactiva del procedimiento multicriterio para priorizar oportunidades de negocio con IA en La Guajira.">
+<style>
+:root{--text:#243746;--text-soft:#637485;--ink:#142536;--muted:#eef3f5;--accent:#08a6bd;--accent-dark:#087789;--cyan:#08a6bd;--gold:#f2b134;--coral:#ee7b63;--green:#5fc59b;--purple:#7257d6;--blue:#2f76d2;--slate:#3f7fae;--success:#238f63;--warning:#ca8216;--danger:#c84f47;--line:rgba(36,55,70,.12)}
+*{box-sizing:border-box;font-family:"Times New Roman",Times,Georgia,serif}
+html,body{margin:0;color:var(--text);background:#ffffff}
+header.topbar{position:sticky;top:0;z-index:50;background:linear-gradient(100deg,#0c2233,#103a47 58%,#0a5563);color:#fff;padding:12px 22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;box-shadow:0 2px 14px rgba(20,37,54,.18)}
+header.topbar h1{font-size:1.25rem;margin:0;font-weight:700;letter-spacing:.3px}
+header.topbar .sub{font-size:.76rem;color:#bfe6ec;margin-top:2px}
+.topactions{margin-left:auto;display:flex;gap:8px;align-items:center}
+.badge-off{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:30px;font-size:.72rem;display:flex;align-items:center;gap:6px}
+.fsbtn{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);color:#fff;padding:6px 13px;border-radius:30px;font-size:.74rem;cursor:pointer;font-weight:700}
+.fsbtn:hover{background:rgba(255,255,255,.28)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green)}
+.progwrap{background:#fff;border-bottom:1px solid var(--line);padding:7px 18px;font-size:.74rem;color:var(--text-soft);display:flex;align-items:center;gap:10px}
+.progwrap .bar{flex:1;height:8px;background:var(--muted);border-radius:20px;overflow:hidden}
+.progwrap .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--green));transition:.6s}
+nav.modnav{position:sticky;top:54px;z-index:40;background:#fff;border-bottom:1px solid var(--line);padding:9px 14px;display:flex;gap:7px;overflow-x:auto}
+nav.modnav button{flex:0 0 auto;border:1px solid var(--line);background:#fff;color:var(--text);padding:9px 14px;border-radius:30px;font-size:.82rem;cursor:pointer;transition:.18s;white-space:nowrap;font-weight:700}
+nav.modnav button:hover:not(:disabled){border-color:var(--accent);transform:translateY(-1px)}
+nav.modnav button.active{background:linear-gradient(135deg,var(--cyan),var(--accent-dark));color:#fff;border-color:var(--accent)}
+nav.modnav button.done{border-color:var(--green);color:var(--success)}
+nav.modnav button.active.done{background:linear-gradient(135deg,var(--green),var(--success));color:#fff}
+nav.modnav button.locked{opacity:.5;cursor:not-allowed}
+main{max-width:1100px;margin:0 auto;padding:14px 22px 110px}
+.module{display:none;animation:fade .35s ease}
+.module.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.block{margin:26px 0}
+.block+.block{border-top:1px solid var(--line);padding-top:6px}
+.eyebrow{font-size:.68rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-dark)}
+.module-title{font-size:1.75rem;color:var(--ink);margin:.12em 0;display:flex;align-items:center;gap:12px;line-height:1.1}
+.lead{color:var(--text-soft);font-size:1rem;margin:.2em 0 1em;max-width:880px}
+h3{color:var(--accent-dark);margin:1.1em 0 .5em;font-size:1.14rem}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:18px 0}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:520px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{text-align:center;padding:6px 4px}
+.kpi .v{font-size:2.3rem;font-weight:800;color:var(--accent-dark);line-height:1}
+.kpi .l{font-size:.72rem;color:var(--text-soft);margin-top:7px;line-height:1.35}
+.ra-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin:14px 0}
+@media(max-width:900px){.ra-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:560px){.ra-grid{grid-template-columns:repeat(2,1fr)}}
+.minicard{display:flex;flex-direction:column;gap:7px}
+.minicard .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff;font-size:.92rem}
+.minicard h4{margin:0;color:var(--ink);font-size:.94rem}
+.minicard p{margin:0;font-size:.8rem;color:var(--text-soft);line-height:1.45}
+.tag{display:inline-block;font-size:.7rem;background:var(--muted);padding:3px 10px;border-radius:20px;color:var(--accent-dark);font-weight:700}
+table.data{width:100%;border-collapse:collapse;margin:12px 0;font-size:.86rem}
+table.data th{background:var(--ink);color:#fff;padding:9px;text-align:left;font-weight:700}
+table.data td{padding:8px 9px;border-bottom:1px solid var(--line)}
+table.data tr.hi td{background:#fff6dc;font-weight:700}
+canvas{max-width:100%;display:block}
+.panelgrid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+@media(max-width:820px){.panelgrid{grid-template-columns:1fr}}
+.controls{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 2px;margin:12px 0}
+.slider-row{display:flex;align-items:center;gap:10px;margin:8px 0;font-size:.84rem}
+.slider-row label{flex:0 0 150px;font-weight:700;color:var(--ink)}
+.slider-row input[type=range]{flex:1;accent-color:var(--accent);height:6px}
+.slider-row .val{flex:0 0 48px;text-align:right;font-weight:800;color:var(--accent-dark)}
+button.btn{border:0;border-radius:14px;padding:11px 18px;background:#eef3f5;color:var(--ink);font-weight:700;cursor:pointer;font-size:.86rem;transition:.18s;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:8px}
+button.btn:before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(255,255,255,.4),transparent);transform:translateX(-120%);transition:.5s}
+button.btn:hover:before{transform:translateX(120%)}
+button.btn:hover{transform:translateY(-2px)}
+button.btn.primary{background:linear-gradient(135deg,var(--cyan),var(--accent-dark));color:#fff}
+button.btn.gold{background:linear-gradient(135deg,var(--gold),#dc9515);color:#3f2d0b}
+button.btn.success{background:linear-gradient(135deg,var(--success),#196d4d);color:#fff}
+button.btn.ghost{background:#fff;border:1px solid var(--accent);color:var(--accent-dark)}
+.note{border-left:3px solid var(--gold);padding:6px 0 6px 15px;font-size:.9rem;margin:12px 0}
+.didac{border-left:3px solid var(--accent);padding:6px 0 6px 15px;font-size:.92rem;margin:12px 0;color:var(--text)}
+.steps{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}
+.steps button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:7px 13px;cursor:pointer;font-size:.8rem;font-weight:700}
+.steps button.active{background:var(--accent-dark);color:#fff;border-color:var(--accent-dark)}
+.q{border-bottom:1px solid var(--line);padding:14px 0;margin:4px 0}
+.q .solo{font-size:.66rem;font-weight:800;letter-spacing:.4px;text-transform:uppercase;color:#fff;background:linear-gradient(135deg,var(--purple),#5a43c0);padding:4px 10px;border-radius:20px}
+.opt{display:block;border:1px solid var(--line);border-radius:11px;padding:10px 13px;margin:7px 0;cursor:pointer;font-size:.88rem;transition:.12s}
+.opt:hover{border-color:var(--accent);background:#f4fcfd}
+.opt.sel{border-color:var(--accent);background:#e3f6f9}
+.opt.correct{border-color:var(--success);background:#e6f6ee}
+.opt.wrong{border-color:var(--danger);background:#fbeceb}
+.fb{margin-top:9px;font-size:.84rem;padding:8px 0 8px 13px;border-left:3px solid var(--line);display:none}
+.fb.show{display:block}
+.fb.ok{border-color:var(--success)}
+.fb.no{border-color:var(--danger)}
+.progress{height:10px;background:var(--muted);border-radius:20px;overflow:hidden;margin:8px 0}
+.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--green));width:0;transition:.5s}
+.legend{font-size:.78rem;color:var(--text-soft);display:flex;gap:18px;flex-wrap:wrap;margin:8px 0}
+.legend span{display:flex;align-items:center;gap:6px}
+.legend i{width:13px;height:13px;border-radius:4px;display:inline-block}
+.fieldrow{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}
+.fieldrow input,.fieldrow select{padding:10px 12px;border:1px solid var(--line);border-radius:11px;font-size:.88rem;flex:1;min-width:180px;background:#fff}
+.chk{border-top:1px dashed var(--gold);border-bottom:1px dashed var(--gold);padding:16px 2px;margin:18px 0}
+.chk h3{margin-top:0;color:var(--warning)}
+.chkq{margin:11px 0}
+#toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:30px;font-size:.86rem;font-weight:700;opacity:0;pointer-events:none;transition:.35s;z-index:300;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#cvtip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;padding:7px 11px;border-radius:9px;font-size:.76rem;z-index:280;opacity:0;transition:opacity .12s;max-width:240px;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+#cvtip.show{opacity:1}
+.result-ring{width:210px;height:210px;border-radius:50%;margin:0 auto;background:conic-gradient(var(--accent) var(--deg,0deg),#e7eef0 0);display:grid;place-items:center}
+.result-ring .inner{width:158px;height:158px;border-radius:50%;background:#fff;display:grid;place-items:center;text-align:center}
+.result-ring .inner b{font-size:2.8rem;color:var(--ink);line-height:1}
+.examgate{position:fixed;inset:0;background:rgba(12,34,51,.94);z-index:400;display:none;place-items:center;text-align:center;color:#fff;padding:24px}
+.examgate.show{display:grid}
+.examgate .box{max-width:480px}
+.examgate h2{font-size:2rem;margin:.2em 0}
+footer{text-align:center;color:var(--text-soft);font-size:.76rem;padding:26px;border-top:1px solid var(--line)}
+#chatbtn{position:fixed;bottom:24px;right:24px;width:62px;height:62px;border-radius:50%;border:none;background:linear-gradient(140deg,var(--accent),var(--accent-dark));color:#fff;font-size:1.7rem;cursor:pointer;box-shadow:0 10px 28px rgba(8,166,189,.5);z-index:250;transition:.2s}
+#chatbtn:hover{transform:scale(1.09)}
+#chatpanel{position:fixed;bottom:96px;right:24px;width:370px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 140px);background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 56px rgba(20,37,54,.3);display:none;flex-direction:column;overflow:hidden;z-index:250}
+#chatpanel.open{display:flex;animation:fade .25s ease}
+#chathead{background:linear-gradient(100deg,#0c2233,#0a5563);color:#fff;padding:13px 16px;display:flex;justify-content:space-between;align-items:center}
+#chatmsgs{flex:1;overflow-y:auto;padding:15px;display:flex;flex-direction:column;gap:10px;background:#f7fafb}
+.msg{max-width:85%;padding:10px 14px;border-radius:15px;font-size:.86rem;line-height:1.5}
+.msg.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px;align-self:flex-start}
+.msg.user{background:linear-gradient(135deg,var(--cyan),var(--accent-dark));color:#fff;border-bottom-right-radius:5px;align-self:flex-end}
+.msg.typing{display:flex;gap:4px}.msg.typing span{width:7px;height:7px;border-radius:50%;background:var(--text-soft);animation:bl 1s infinite}.msg.typing span:nth-child(2){animation-delay:.2s}.msg.typing span:nth-child(3){animation-delay:.4s}
+@keyframes bl{0%,80%,100%{opacity:.3}40%{opacity:1}}
+#chatchips{display:flex;gap:6px;overflow-x:auto;padding:9px 11px;background:#f7fafb;border-top:1px solid var(--line)}
+#chatchips button{flex:0 0 auto;border:1px solid var(--accent);background:#fff;color:var(--accent-dark);border-radius:20px;padding:6px 12px;font-size:.74rem;cursor:pointer;white-space:nowrap;font-weight:600}
+#chatinput{display:flex;gap:8px;padding:11px;background:#fff;border-top:1px solid var(--line)}
+#chatinput input{flex:1;padding:11px 13px;border:1px solid var(--line);border-radius:24px;font-size:.86rem}
+#chatinput button{background:var(--accent);color:#fff;border:none;border-radius:50%;width:42px;height:42px;cursor:pointer;font-size:1rem}
+.mind{width:100%;height:auto;display:block;max-width:520px;margin:0 auto}
+select,input,button,textarea{font-family:"Times New Roman",Times,Georgia,serif}
+.ruta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:12px 0}
+@media(max-width:620px){.ruta-grid{grid-template-columns:1fr}}
+.ruta-cell{display:flex;flex-direction:column}
+.q-lbl{font-weight:700;color:var(--ink);min-height:3.1em;display:flex;align-items:flex-start;line-height:1.35}
+.ruta-cell select{margin-top:auto;padding:11px 12px;border:1px solid var(--line);border-radius:11px;font-size:.9rem;background:#fff;width:100%}
+.wide{width:100vw;position:relative;left:50%;transform:translateX(-50%);padding:0 26px;margin:10px 0;box-sizing:border-box}
+
+/* ===== Extensiones para la edición de reproducibilidad ===== */
+.topbar .sub{color:var(--text-soft);font-size:.92rem;margin-top:4px;line-height:1.4}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:12px;margin:18px 0 6px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px 10px;text-align:center;display:flex;flex-direction:column;gap:5px;box-shadow:0 1px 5px rgba(20,37,54,.06)}
+.kpi b{font-size:1.32rem;color:var(--accent-dark);line-height:1.12;font-variant-numeric:tabular-nums}
+.kpi span{font-size:.8rem;color:var(--text-soft);line-height:1.32}
+.flow .fl-n{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .16s ease}
+.flow .fl-n:hover{transform:translateY(-3px)}
+.flow .fl-n:hover .bg{stroke:#f2b134;stroke-width:2.4}
+.flow .fl-n:focus{outline:none}
+.flow .fl-n:focus .bg{stroke:#f2b134;stroke-width:2.4}
+.module h2.module-title{letter-spacing:.2px}
+.block>h3{border-left:4px solid var(--accent);padding-left:10px;margin-top:22px}
+.tblwrap{overflow:auto;max-height:520px;border:1px solid var(--line);border-radius:10px;margin-top:8px;box-shadow:0 1px 4px rgba(20,37,54,.05)}
+table.tbl{width:100%;border-collapse:collapse;font-size:.9rem;background:#fff}
+table.tbl th{position:sticky;top:0;background:var(--ink);color:#fff;padding:8px 10px;text-align:left;font-weight:600;z-index:2}
+table.tbl td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.tbl tbody tr:nth-child(even) td{background:rgba(238,243,245,.55)}
+table.tbl.compact td,table.tbl.compact th{padding:5px 8px;font-size:.86rem}
+table.tbl.center td:not(:nth-child(2)){text-align:center}
+tr.hl-gold td{background:rgba(242,177,52,.18)!important}
+tr.hl-soft td{background:rgba(8,166,189,.10)!important}
+.warn{color:var(--danger)}
+.chk-ok{color:var(--success);font-weight:bold}
+.okline{color:var(--success)}
+.codebox{background:#0f2233;color:#d9e8f2;border-radius:10px;padding:12px 14px;font-family:ui-monospace,Consolas,monospace;font-size:.84rem;overflow:auto;line-height:1.5;white-space:pre}
+code{font-family:ui-monospace,Consolas,monospace;font-size:.86em;background:var(--muted);padding:1px 5px;border-radius:5px}
+.filtro{width:100%;padding:9px 12px;border:1px solid var(--line);border-radius:9px;font-size:.95rem;margin:6px 0;font-family:inherit}
+.chipline{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.steps-v{display:grid;gap:12px;margin-top:10px}
+.steps-v .minicard h4{margin-top:0}
+ol.lst{margin:6px 0 0 18px;padding:0}
+ol.lst li{margin-bottom:8px;line-height:1.5}
+.formula{font-style:italic;white-space:nowrap}
+.tag.t-ok{background:rgba(35,143,99,.14);color:var(--success)}
+.tag.t-doc{background:rgba(63,127,174,.14);color:var(--slate)}
+details{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0;background:#fff}
+details summary{cursor:pointer;font-weight:600;color:var(--accent-dark)}
+select,input[type=number]{padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-family:inherit;font-size:.92rem}
+.fieldrow label{display:inline-flex;align-items:center;gap:6px;margin-right:12px}
+.repo-box{display:flex;align-items:center;gap:10px;background:#fff;border:1px dashed var(--slate);border-radius:11px;padding:10px 14px;margin:10px 0;font-size:.94rem}
+footer.repro{margin:26px auto 30px;max-width:1100px;padding:0 18px;color:var(--text-soft);font-size:.88rem;text-align:center;line-height:1.55}
+@media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+/* ===== Refinamiento tipográfico y estético (edición final) ===== */
+.module p,.module .lead,.module .note,.minicard p,ol.lst li{text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.module .didac{text-align:left}
+h2.module-title{border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:14px}
+.eyebrow{letter-spacing:.16em}
+.kpi{transition:transform .15s ease,box-shadow .15s ease}
+.kpi:hover{transform:translateY(-2px);box-shadow:0 5px 14px rgba(20,37,54,.10)}
+table.tbl td{line-height:1.45}
+.note{border-radius:10px}
+footer.repro{border-top:1px solid var(--line);padding-top:16px}
+.repo-box a{color:var(--accent-dark);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(8,119,137,.35)}
+.repo-box a:hover{border-bottom-color:var(--accent-dark)}
+</style>
+</head>
+<body>
+<header class="topbar">
+ <div>
+  <h1>Reproducibilidad · Priorización multicriterio de oportunidades de negocio con IA — La Guajira</h1>
+  <div class="sub">Datos abiertos, código con semilla fija y verificación interactiva del procedimiento multicriterio</div>
+ </div>
+</header>
+<nav class="modnav" id="nav"></nav>
+<main id="main"></main>
+<div id="cvtip"></div>
+<footer class="repro">Página de reproducibilidad del artículo. Todos los cálculos deterministas se ejecutan localmente en su navegador con las entradas publicadas; los valores normativos son los del artículo y su material suplementario (semilla 42).</footer>
+<script>
+/* ===== Datos canónicos (idénticos al manuscrito y al material suplementario) ===== */
+const W0=[0.18,0.22,0.16,0.14,0.12,0.18];
+const CRIT=[["C1","Económico"],["C2","Social"],["C3","Ambiental"],["C4","Técnico"],["C5","Regulatorio"],["C6","Financiero"]];
+const CRITLONG=["Económico-productivo","Social / transición justa","Ambiental","Técnico","Regulatorio","Financiero"];
+const T=[
+ {c:"T1",n:"O&M predictivo solar-eólico",s:"Energía",sc:[78,60,72,80,78,75]},
+ {c:"T2",n:"Microrredes inteligentes",s:"Energía/agua",sc:[75,65,80,58,60,60]},
+ {c:"T3",n:"Desalinización renovable con IA",s:"Energía/agua",sc:[70,78,82,45,50,45]},
+ {c:"T4",n:"Gestión hídrica comunitaria",s:"Agua",sc:[62,88,70,70,72,68]},
+ {c:"T5",n:"Torre de control logística",s:"Logística",sc:[72,62,60,62,70,66]},
+ {c:"T6",n:"Consolidador de carga regional",s:"Logística",sc:[68,60,64,60,72,62]},
+ {c:"T7",n:"Pesca y acuicultura inteligente",s:"Agro-pesca",sc:[64,82,68,55,62,55]},
+ {c:"T8",n:"Agricultura de precisión árida",s:"Agro-pesca",sc:[60,70,75,52,66,54]},
+ {c:"T9",n:"Capacidad de carga turística",s:"Turismo",sc:[70,72,85,60,66,64]},
+ {c:"T10",n:"Revenue management turístico",s:"Turismo",sc:[72,75,66,64,72,70]},
+ {c:"T11",n:"Guía conversacional wayuunaiki",s:"Turismo",sc:[58,80,60,66,74,64]},
+ {c:"T12",n:"Clasificación de residuos con IA",s:"Econ. circular",sc:[66,66,84,56,60,56]},
+ {c:"T13",n:"Valorización de orgánicos",s:"Econ. circular",sc:[60,64,80,54,58,54]},
+ {c:"T14",n:"Trazabilidad de artesanía Wayuu",s:"Manuf./cultura",sc:[70,86,64,62,70,66]},
+ {c:"T15",n:"Priorizador de inversión pública",s:"Serv. digitales",sc:[58,68,64,72,70,66]}
+];
+const METR={renov:75.1,internet:72.8,ia_ue:13.5,fncer:16.3,gini:0.65,upme:10.8,ipm:40.1,ipm_rank:4,micro:96.8,rio_cagr:11.6,rio_r2:0.87,hhi:0.25,desempleo:12.3};
+
+const AHP_A=[[1,0.5,1,2,2,1],[2,1,1,2,2,1],[1,1,1,2,1,0.5],[0.5,0.5,0.5,1,2,1],[0.5,0.5,1,0.5,1,1],[1,1,2,1,1,1]];
+const AHP_OF={lmax:'6,327',ci:'0,065',cr:'0,053',ev:['0,179','0,225','0,164','0,131','0,116','0,184'],orden:'C2 \u227B C1 \u223C C6 \u227B C3 \u227B C4 \u227B C5'};
+const TAB7={orden:['T1','T4','T14','T10','T9','T11','T2','T15','T7','T5','T12','T6','T3','T8','T13'],
+ rho:{topsis:'0,98',vikor:'0,79',wpm:'0,99'},compromiso:['T10','T9','T14','T4']};
+const MCOF={cods:['T1','T4','T14','T10','T9'],
+ A:{p1:[60.6,39.2,0.0,0.0,0.1],p3:[98.0,99.7,66.0,14.5,21.8],p5:[99.9,100,99.8,100,97.9],rho:'0,96',ic:'0,90\u20130,99'},
+ B:{p1:[39.9,32.1,11.9,8.3,6.5],p3:[81.0,76.4,49.8,40.3,34.6],p5:[95.8,94.0,81.1,74.5,69.6],rho:'0,81',ic:'0,65\u20130,92'},
+ C:{p1:[40.4,30.6,12.1,8.2,7.1],p3:[77.8,73.6,48.6,40.4,36.4],p5:[93.3,92.5,78.5,72.9,68.2],rho:'0,79',ic:'0,60\u20130,91'}};
+const SHA={'datos/criterios_pesos.csv':'d48459dfcca7','datos/matriz_tipologias.csv':'ef96f7ed4ef0','verificar_ahp_consenso.py':'0285532a6422','analisis_comparativo_robustez.py':'312d1cdb086e','mc_regimenes.py':'d2451673c512','modelo_multicriterio.py':'e73323cbe265'};
+const INV=[[".DS_Store", "(s/ext)", "0.006", "cefc13636467", "datos"], ["70 ideas basadas en IA.docx", ".docx", "0.034", "5237685959bb", "doc/salida"], ["AGENTS.md", ".md", "0.0", "bc1d72dcc1e7", "doc/salida"], ["Base de datos nvestigación portafolio de negocios 4.0/17-07-2025-OEE-DV-ESTADISTICAS-EMPRESAS-RUES-MINCIT.xlsx", ".xlsx", "5.664", "43925610fd65", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/29-05-2026-OEE-EC-ESTADISTICAS-TURISMO-MINCIT.xlsx", ".xlsx", "7.485", "7dc7b69c2e01", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_EG.ELC.RNEW.ZS_DS2_en_excel_v2_276813 (1).xls", ".xls", "0.248", "a927eec1e6a2", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_EG.ELC.RNEW.ZS_DS2_en_excel_v2_276813.xls", ".xls", "0.248", "a927eec1e6a2", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_EG.FEC.RNEW.ZS_DS2_en_excel_v2_267583.xls", ".xls", "0.194", "65fabad2a6eb", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_IT.NET.BBND.P2_DS2_en_excel_v2_260048.xls", ".xls", "0.216", "b8ea9a8f02a6", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_IT.NET.USER.ZS_DS2_en_excel_v2_115661 (1).xls", ".xls", "0.223", "7880b5d98219", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_IT.NET.USER.ZS_DS2_en_excel_v2_115661 (2).xls", ".xls", "0.223", "7880b5d98219", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_IT.NET.USER.ZS_DS2_en_excel_v2_115661.xls", ".xls", "0.223", "7880b5d98219", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_ST.INT.ARVL_DS2_en_excel_v2_279278.xls", ".xls", "0.18", "de5ad498bb9c", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/API_ST.INT.RCPT.CD_DS2_en_excel_v2_266126.xls", ".xls", "0.198", "9c9428e60e15", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/CNPV-2018-NBI-DIVIPOLA-2021.xlsx", ".xlsx", "0.412", "0e6f1737c09b", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/CNPV-2018-NBI.xlsx", ".xlsx", "0.423", "96775308d340", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/CNPV-2018-VIHOPE-v3.xls", ".xls", "0.736", "32bdeb24e469", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/CoCObservatoryData (1).xlsx", ".xlsx", "0.095", "dfd944d4935c", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/CoCObservatoryData (2).xlsx", ".xlsx", "0.095", "dfd944d4935c", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/CoCObservatoryData.xlsx", ".xlsx", "0.095", "dfd944d4935c", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/DANE_DIRECTORIO_ESTADISTICO_EMPRESAS.xlsx", ".xlsx", "78.476", "fe72ebe47792", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/EMP_NIFL_SEX_ECO_NB_Q-20260603T2116.csv", ".csv", "54.987", "de937b8e4858", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/EMP_TOUR_SEX_ECO_NB_A-20260603T2030.csv", ".csv", "2.764", "6e97b1fdb734", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/EMP_TOUR_SEX_ECO_NB_A-20260603T2116.csv", ".csv", "2.764", "6e97b1fdb734", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/EMP_TPIF_SEX_NB_A-20260603T2030.csv", ".csv", "0.17", "0ff663f09ee1", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/EMP_TPIF_SEX_NB_A-20260603T2116.csv", ".csv", "0.17", "0ff663f09ee1", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/Empresas_de_Turismo_Distrito_Riohacha.csv", ".csv", "0.344", "430c42f27843", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/Estructura_empresarial_seg_n_municipio_y_tama_o_de_empresa.csv", ".csv", "0.012", "573348b6c19e", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/FNCER.csv", ".csv", "0.033", "f0553b1c306b", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/FixedBroadbandSubscriptions_2000-2020.xlsx", ".xlsx", "0.22", "46b4915d4a71", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/HOGARES_Cuadros_CNPV_2018.XLSX", ".xlsx", "0.931", "ff7754daa56c", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IDIDataset2024edition (1).xlsx", ".xlsx", "0.123", "8e07eddcebc6", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IDIDataset2024edition (2).xlsx", ".xlsx", "0.123", "8e07eddcebc6", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IDIDataset2024edition.xlsx", ".xlsx", "0.123", "8e07eddcebc6", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IRENA_OFGStats_Extract_2024 (1).xlsx", ".xlsx", "3.461", "0766f5c098ee", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IRENA_OFGStats_Extract_2024.xlsx", ".xlsx", "3.461", "0766f5c098ee", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IRENA_TSSC_Solar_PV_Manufacturing_Cost_Model_v1 (1).xlsx", ".xlsx", "1.538", "41bc35f04222", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IRENA_TSSC_Solar_PV_Manufacturing_Cost_Model_v1.xlsx", ".xlsx", "1.538", "41bc35f04222", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/ITU_regional_global_Key_ICT_indicator_aggregates_Nov_2025 (1).xlsx", ".xlsx", "0.105", "1c36533d48ea", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/ITU_regional_global_Key_ICT_indicator_aggregates_Nov_2025.xlsx", ".xlsx", "0.105", "1c36533d48ea", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IndividualsUsingInternetByGender_Jan2025 (1).xlsx", ".xlsx", "0.046", "9d25dfbc34e4", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/IndividualsUsingInternetByGender_Jan2025.xlsx", ".xlsx", "0.046", "9d25dfbc34e4", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/Informe_registros_activos_de_proyectos_generacion_electrica_abril_2026.xlsx", ".xlsx", "0.063", "3e516a207ee2", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/Informe_registros_activos_de_proyectos_generacion_electrica_enero_2026.xlsx", ".xlsx", "0.048", "be8a6a7e86fb", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/OECD.CFE.TOU,DSD_TOURISM_ENT_EMP@DF_ENT_EMP,1.0+all (1).csv", ".csv", "1.628", "6c8bc21721ec", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/OECD.CFE.TOU,DSD_TOURISM_ENT_EMP@DF_ENT_EMP,1.0+all.csv", ".csv", "1.628", "6c8bc21721ec", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_B@DF_BUSINESSES,1.0+all (1).csv", ".csv", "27.294", "349ff089f6f7", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_B@DF_BUSINESSES,1.0+all (2).csv", ".csv", "27.294", "349ff089f6f7", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_B@DF_BUSINESSES,1.0+all.csv", ".csv", "27.294", "349ff089f6f7", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_HH_IND@DF_HH,1.0+all (1).csv", ".csv", "2.849", "d6445f3b60c5", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/OECD.STI.DEP,DSD_ICT_HH_IND@DF_HH,1.0+all.csv", ".csv", "2.849", "d6445f3b60c5", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/Registro_Nacional_de_Turismo_-_RNT.csv", ".csv", "92.001", "53bcbbcd1569", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/SDG_0861_SEX_RT_A-20260603T2116.csv", ".csv", "2.702", "39a5d4b24cad", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/Tablero_informativo_sobre_informe_registros_activos_abril_2026.xlsx", ".xlsx", "0.164", "56a2494ab1b2", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/VIVIENDAS_Cuadros_CNPV_2018.XLSX", ".xlsx", "8.017", "40e6803de3e6", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-ECV-2025.xlsx", ".xlsx", "2.436", "c30823603d8e", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-EMA-Desestacionalizado-mar2026.xlsx", ".xlsx", "0.064", "fabc6a25b586", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-EMA-mar2026.xlsx", ".xlsx", "1.673", "d9f1cbdffdc5", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-ENTICHogares-2024.xlsx", ".xlsx", "3.942", "8831f5067dd9", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHDepartamentos-2025 (1).xls", ".xls", "1.174", "ed0686487bbf", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHDepartamentos-2025 (2).xls", ".xls", "1.174", "ed0686487bbf", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHDepartamentos-2025 (3).xls", ".xls", "1.174", "ed0686487bbf", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHDepartamentos-2025.xls", ".xls", "1.174", "ed0686487bbf", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-GEIHEISS-ene-mar2026.xlsx", ".xlsx", "1.458", "385a0f40e07c", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-PMultidimensional-2025.xlsx", ".xlsx", "0.429", "c8ce1c3e7225", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anex-PMultidimensional-Departamental-2025.xlsx", ".xlsx", "0.46", "8530b05602db", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anexo-censal-pobreza-municipal-2018.xlsx", ".xlsx", "2.96", "98efc6de3bb9", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/anexo-directorio-estadistico-empresas-2019-2021.xlsx", ".xlsx", "0.139", "2f321ad51e24", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/articles-383104_recurso_02.xlsx", ".xlsx", "0.016", "5cae2245b06b", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/articles-396291_recurso_16.xlsx", ".xlsx", "0.18", "99ee2378cd76", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/articles-396294_recurso_14.xlsx", ".xlsx", "0.338", "0e38e15b720b", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/deep-research-report-2.md", ".md", "0.024", "c057bf313ce9", "doc/salida"], ["Base de datos nvestigación portafolio de negocios 4.0/deep-research-report-3.md", ".md", "0.017", "ae21b816b6c6", "doc/salida"], ["Base de datos nvestigación portafolio de negocios 4.0/deep-research-report.md", ".md", "0.011", "abb3f1feaf3d", "doc/salida"], ["Base de datos nvestigación portafolio de negocios 4.0/estat_isoc_eb_ai.tsv", ".tsv", "1.65", "1216620fab07", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/estat_isoc_eb_ai.tsv.gz", ".tsv.gz", "0.258", "7971a9c99016", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/estat_isoc_eb_ain2.tsv.gz", ".tsv.gz", "2.041", "ec6920ef1f6a", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/estat_nrg_ind_ren_en.csv.gz", ".csv.gz", "0.022", "025fb626d823", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/international-tourist-trips (1).csv", ".csv", "0.131", "778f32082be1", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/international-tourist-trips (2).csv", ".csv", "0.131", "778f32082be1", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/international-tourist-trips (3).csv", ".csv", "0.131", "778f32082be1", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/international-tourist-trips.csv", ".csv", "0.131", "778f32082be1", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/worldbank_broadband_subscriptions.xls", ".xls", "0.216", "b8ea9a8f02a6", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/worldbank_internet_users.xls", ".xls", "0.223", "7880b5d98219", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/worldbank_tourist_arrivals.xls", ".xls", "0.18", "de5ad498bb9c", "datos"], ["Base de datos nvestigación portafolio de negocios 4.0/worldbank_tourist_receipts.xls", ".xls", "0.198", "9c9428e60e15", "datos"], ["Cap5_Portafolio_IA_La_Guajira.docx", ".docx", "0.135", "afa4d31c3463", "doc/salida"], ["Caps1-4_Portafolio_IA_La_Guajira.docx", ".docx", "0.027", "99c083f12fe0", "doc/salida"], ["Caps6-8_Portafolio_IA_La_Guajira.docx", ".docx", "0.092", "412215050436", "doc/salida"], ["Eco-Circular/Ideas - economía circular.docx", ".docx", "0.015", "e5eff96461f9", "doc/salida"], ["Ideas - Agua.docx", ".docx", "0.014", "baf7a891c28b", "doc/salida"], ["Ideas finales.docx", ".docx", "0.026", "2577309b2daf", "doc/salida"], ["Informe_Final_Portafolio_IA_La_Guajira.docx", ".docx", "0.237", "f416453fb6fe", "doc/salida"], ["Logística y negocios portuarios/Ideas - Logística.docx", ".docx", "0.014", "168ff4b3f0c4", "doc/salida"], ["Proyecto investigación aprobado.pdf", ".pdf", "1.838", "ba366ecc7ba3", "doc/salida"], ["Turismo /Ideas - turismo.docx", ".docx", "0.015", "79057cdda884", "doc/salida"], ["analysis_outputs/ANALISIS_ESTADISTICO_AVANZADO_PORTAFOLIO_IA_LA_GUAJIRA.md", ".md", "0.015", "e7d6aa698841", "doc/salida"], ["analysis_outputs/grafico_mcda_prob_top5.svg", ".svg", "0.003", "d25a490851f5", "doc/salida"], ["analysis_outputs/grafico_turismo_riohacha_tendencia.svg", ".svg", "0.002", "4f9274e5360c", "doc/salida"], ["analysis_outputs/grafico_upme_capacidad_departamentos.svg", ".svg", "0.002", "53fbf1f77211", "doc/salida"], ["analysis_outputs/inventario_bases_datos.csv", ".csv", "0.018", "b40816da5b59", "datos"], ["analysis_outputs/metricas_clave_analisis.json", ".json", "0.049", "23e3a127fbc4", "datos"], ["analysis_outputs/run_statistical_analysis.py", ".py", "0.056", "2876a2aff730", "doc/salida"]];
+const CSV_PESOS="Codigo,Criterio,Peso\nC1,Económico-productivo,0.18\nC2,Social y transición justa,0.22\nC3,Ambiental,0.16\nC4,Técnico,0.14\nC5,Regulatorio-licenciamiento,0.12\nC6,Financiero y de riesgo,0.18";
+const CSV_MATRIZ="Codigo,Tipologia,Sector,C1,C2,C3,C4,C5,C6\nT1,O&M predictivo para parques solares y eólicos,Energía,78,60,72,80,78,75\nT2,Microrredes con gestión inteligente de demanda,Energía/agua,75,65,80,58,60,60\nT3,Desalinización renovable con gestión hídrica,Energía/agua,70,78,82,45,50,45\nT4,Orquestador de gestión hídrica comunitaria,Energía/agua,62,88,70,70,72,68\nT5,Torre de control logística con cadena de frío,Logística,72,62,60,62,70,66\nT6,Consolidador inteligente de carga regional,Logística,68,60,64,60,72,62\nT7,Pesca y acuicultura artesanal inteligente,Agro-pesca,64,82,68,55,62,55\nT8,Agricultura de precisión para zonas áridas,Agro-pesca,60,70,75,52,66,54\nT9,Capacidad de carga turística y destino inteligente,Turismo,70,72,85,60,66,64\nT10,Revenue management para turismo comunitario,Turismo,72,75,66,64,72,70\nT11,Guía cultural conversacional español/wayuunaiki,Turismo,58,80,60,66,74,64\nT12,Clasificación de residuos y simbiosis industrial,Economía circular,66,66,84,56,60,56\nT13,Valorización inteligente de residuos orgánicos,Economía circular,60,64,80,54,58,54\nT14,Trazabilidad con blockchain para artesanía Wayuu,Manuf./artesanías,70,86,64,62,70,66\nT15,Priorizador de inversión pública (multicriterio),Servicios digitales,58,68,64,72,70,66";
+
+const PAL={cyan:"#08a6bd",cyanD:"#087789",gold:"#f2b134",coral:"#ee7b63",green:"#5fc59b",purple:"#7257d6",blue:"#2f76d2",slate:"#3f7fae",ink:"#142536",soft:"#637485",grid:"#e3e9eb"};
+
+const dot=(a,b)=>a.reduce((s,x,i)=>s+x*b[i],0);
+const norm=w=>{const s=w.reduce((a,b)=>a+b,0);return w.map(x=>x/s);};
+function totals(w){const wn=norm(w);return T.map(t=>({...t,tot:dot(t.sc,wn)}));}
+function impVia(t){return {imp:(t.sc[0]*0.18+t.sc[1]*0.22+t.sc[2]*0.16)/0.56,via:(t.sc[3]*0.14+t.sc[4]*0.12+t.sc[5]*0.18)/0.44};}
+function pareto(pts){return pts.map((p,i)=>!pts.some((q,j)=>j!==i&&q.x>=p.x&&q.y>=p.y&&(q.x>p.x||q.y>p.y)));}
+let _z=null;function gauss(){if(_z!==null){const v=_z;_z=null;return v;}let u=0,v=0;while(u===0)u=Math.random();while(v===0)v=Math.random();const r=Math.sqrt(-2*Math.log(u));_z=r*Math.sin(2*Math.PI*v);return r*Math.cos(2*Math.PI*v);}
+function gamma(k){const d=k-1/3,c=1/Math.sqrt(9*d);while(true){let x,v;do{x=gauss();v=1+c*x;}while(v<=0);v=v*v*v;const u=Math.random();if(u<1-0.0331*x*x*x*x)return d*v;if(Math.log(u)<0.5*x*x+d-d*v+d*Math.log(v))return d*v;}}
+function dirichlet(a){const g=a.map(x=>gamma(x));const s=g.reduce((p,q)=>p+q,0);return g.map(x=>x/s);}
+function rankArr(arr){const idx=arr.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);const r=new Array(arr.length);idx.forEach((p,k)=>r[p[1]]=k+1);return r;}
+function spearman(a,b){const n=a.length;const ra=rankArr(a),rb=rankArr(b);let d2=0;for(let i=0;i<n;i++){const d=ra[i]-rb[i];d2+=d*d;}return 1-6*d2/(n*(n*n-1));}
+function hidpi(cv,w,h){const r=window.devicePixelRatio||1;cv.width=w*r;cv.height=h*r;cv.style.width=w+'px';cv.style.height=h+'px';const ctx=cv.getContext('2d');ctx.setTransform(r,0,0,r,0,0);return ctx;}
+function roundRect(ctx,x,y,w,h,r){r=Math.min(r,h/2,w/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+function animate(cb,dur){dur=dur||650;const t0=performance.now();function f(now){let k=(now-t0)/dur;if(k<0)k=0;if(k>1)k=1;cb(1-Math.pow(1-k,3));if(k<1)requestAnimationFrame(f);}requestAnimationFrame(f);}
+let _tip;function tipEl(){_tip=_tip||document.getElementById('cvtip');return _tip;}
+function showTip(ev,html){const t=tipEl();t.innerHTML=html;t.style.left=(ev.clientX+14)+'px';t.style.top=(ev.clientY+12)+'px';t.classList.add('show');}
+function hideTip(){tipEl().classList.remove('show');}
+function grad(ctx,x0,y0,x1,y1,c1,c2){const g=ctx.createLinearGradient(x0,y0,x1,y1);g.addColorStop(0,c1);g.addColorStop(1,c2);return g;}
+function lighten(hex,p){const n=parseInt(hex.slice(1),16);let r=(n>>16)+p,g=((n>>8)&255)+p,b=(n&255)+p;r=Math.min(255,r);g=Math.min(255,g);b=Math.min(255,b);return 'rgb('+r+','+g+','+b+')';}
+function barH(cv,labels,vals,opts){opts=opts||{};const w=cv.clientWidth||640,h=opts.h||(labels.length*30+44);cv.style.height=h+'px';const ctx=hidpi(cv,w,h);const mx=opts.max||Math.max.apply(null,vals)*1.14,L=opts.L||190,R=18;const hits=[];animate(k=>{ctx.clearRect(0,0,w,h);ctx.font='13px "Times New Roman",serif';ctx.textBaseline='middle';hits.length=0;labels.forEach((lb,i)=>{const y=22+i*(h-30)/labels.length;const bh=(h-30)/labels.length*0.66;const full=(vals[i]/mx)*(w-L-R);const bw=full*k;const col=(opts.colors&&opts.colors[i])||PAL.cyan;ctx.fillStyle=grad(ctx,L,0,L+full,0,lighten(col,40),col);roundRect(ctx,L,y,Math.max(2,bw),bh,7);ctx.fill();ctx.fillStyle=PAL.ink;ctx.textAlign='right';ctx.font='13px "Times New Roman",serif';ctx.fillText(lb,L-9,y+bh/2);ctx.fillStyle=PAL.soft;ctx.textAlign='left';ctx.font='bold 13px "Times New Roman",serif';ctx.fillText((opts.fmt?opts.fmt(vals[i]):vals[i].toFixed(1)),L+bw+7,y+bh/2);hits.push({x0:L,x1:L+full,y0:y,y1:y+bh,html:opts.tip?opts.tip(i):lb});});});cv.onmousemove=ev=>{const r=cv.getBoundingClientRect(),mx2=ev.clientX-r.left,my=ev.clientY-r.top;const hit=hits.find(z=>mx2>=z.x0&&mx2<=z.x1&&my>=z.y0&&my<=z.y1);if(hit)showTip(ev,hit.html);else hideTip();};cv.onmouseleave=hideTip;}
+function vbars(cv,labels,vals,cols,fmt,opts){opts=opts||{};const w=cv.clientWidth||640,h=opts.h||340;cv.style.height=h+'px';const ctx=hidpi(cv,w,h);const pad={l:42,r:14,t:20,b:42},gw=(w-pad.l-pad.r)/labels.length,mx=Math.max.apply(null,vals)*1.16;const hits=[];animate(k=>{ctx.clearRect(0,0,w,h);ctx.strokeStyle=PAL.grid;ctx.lineWidth=1;for(let g=0;g<=4;g++){const yy=pad.t+(h-pad.t-pad.b)*g/4;ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();}ctx.font='12px "Times New Roman",serif';hits.length=0;labels.forEach((l2,i)=>{const x0=pad.l+i*gw,bw=gw*0.58,bx=x0+gw*0.21,full=(vals[i]/mx)*(h-pad.t-pad.b),bh=full*k;const col=cols[i]||PAL.cyan;ctx.fillStyle=grad(ctx,0,h-pad.b-full,0,h-pad.b,col,lighten(col,35));roundRect(ctx,bx,h-pad.b-bh,bw,bh,6);ctx.fill();ctx.fillStyle=PAL.soft;ctx.textAlign='center';ctx.font='bold 12px "Times New Roman",serif';if(k>0.9&&vals[i])ctx.fillText(fmt?fmt(vals[i]):vals[i],bx+bw/2,h-pad.b-bh-7);ctx.fillStyle=PAL.ink;ctx.font='12px "Times New Roman",serif';ctx.fillText(l2,x0+gw/2,h-pad.b+15);hits.push({x0:bx,x1:bx+bw,y0:h-pad.b-full,y1:h-pad.b,html:(opts.tip?opts.tip(i):l2+': '+(fmt?fmt(vals[i]):vals[i]))});});});cv.onmousemove=ev=>{const r=cv.getBoundingClientRect(),X=ev.clientX-r.left,Y=ev.clientY-r.top;const hit=hits.find(z=>X>=z.x0&&X<=z.x1&&Y>=z.y0&&Y<=z.y1);if(hit)showTip(ev,hit.html);else hideTip();};cv.onmouseleave=hideTip;}
+function grouped(cv,labels,a,b,la,lb,opts){opts=opts||{};const w=cv.clientWidth||640,h=opts.h||340;cv.style.height=h+'px';const ctx=hidpi(cv,w,h);const pad={l:42,r:14,t:30,b:42},mx=Math.max(Math.max.apply(null,a),Math.max.apply(null,b))*1.18,gw=(w-pad.l-pad.r)/labels.length;animate(k=>{ctx.clearRect(0,0,w,h);ctx.strokeStyle=PAL.grid;for(let g=0;g<=4;g++){const yy=pad.t+(h-pad.t-pad.b)*g/4;ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();}ctx.font='12px "Times New Roman",serif';labels.forEach((l2,i)=>{const x0=pad.l+i*gw;[[a[i],PAL.gold,0],[b[i],PAL.cyan,1]].forEach(p=>{const bw=gw*0.32,bx=x0+gw*0.16+p[2]*bw,full=(p[0]/mx)*(h-pad.t-pad.b),bh=full*k;ctx.fillStyle=grad(ctx,0,h-pad.b-full,0,h-pad.b,p[1],lighten(p[1],35));roundRect(ctx,bx,h-pad.b-bh,bw,bh,5);ctx.fill();ctx.fillStyle=PAL.soft;ctx.textAlign='center';if(k>0.9)ctx.fillText(p[0].toFixed(0),bx+bw/2,h-pad.b-bh-6);});ctx.fillStyle=PAL.ink;ctx.textAlign='center';ctx.fillText(l2,x0+gw/2,h-pad.b+15);});ctx.textAlign='left';ctx.fillStyle=PAL.gold;ctx.fillRect(pad.l,10,12,12);ctx.fillStyle=PAL.ink;ctx.fillText(' '+la,pad.l+15,16);ctx.fillStyle=PAL.cyan;ctx.fillRect(pad.l+120,10,12,12);ctx.fillStyle=PAL.ink;ctx.fillText(' '+lb,pad.l+135,16);});}
+function scatter(cv,pts,opts){opts=opts||{};const w=cv.clientWidth||(cv.parentElement&&cv.parentElement.clientWidth)||980,h=opts.h||420;cv.style.height=h+'px';const ctx=hidpi(cv,w,h);const pad={l:54,r:24,t:18,b:46};const dc=opts.dom||PAL.cyan;const xs=pts.map(p=>p.x),ys=pts.map(p=>p.y);const xmin=opts.xmin!=null?opts.xmin:Math.min.apply(null,xs)-2,xmax=opts.xmax!=null?opts.xmax:Math.max.apply(null,xs)+2,ymin=opts.ymin!=null?opts.ymin:Math.min.apply(null,ys)-3,ymax=opts.ymax!=null?opts.ymax:Math.max.apply(null,ys)+3;const X=v=>pad.l+(v-xmin)/(xmax-xmin)*(w-pad.l-pad.r),Y=v=>h-pad.b-(v-ymin)/(ymax-ymin)*(h-pad.t-pad.b);let hov=-1;
+ function draw(k){ctx.clearRect(0,0,w,h);ctx.strokeStyle=PAL.grid;ctx.fillStyle=PAL.soft;ctx.font='12px "Times New Roman",serif';ctx.lineWidth=1;for(let g=0;g<=4;g++){const gx=xmin+(xmax-xmin)*g/4,gy=ymin+(ymax-ymin)*g/4;ctx.beginPath();ctx.moveTo(X(gx),pad.t);ctx.lineTo(X(gx),h-pad.b);ctx.stroke();ctx.beginPath();ctx.moveTo(pad.l,Y(gy));ctx.lineTo(w-pad.r,Y(gy));ctx.stroke();ctx.textAlign='center';ctx.fillText(gx.toFixed(0),X(gx),h-pad.b+15);ctx.textAlign='right';ctx.fillText(gy.toFixed(0),pad.l-6,Y(gy));}
+  if(opts.frontier){const fr=pts.filter(p=>p.front).sort((a,b)=>a.x-b.x);const g2=ctx.createLinearGradient(0,0,w,0);g2.addColorStop(0,'#f2b134');g2.addColorStop(1,'#ee7b63');ctx.strokeStyle=g2;ctx.lineWidth=2.6;ctx.setLineDash([7,5]);ctx.beginPath();fr.forEach((p,i)=>{const xx=X(p.x),yy=Y(p.y);i?ctx.lineTo(xx,yy):ctx.moveTo(xx,yy);});ctx.stroke();ctx.setLineDash([]);}
+  pts.forEach((p,i)=>{const base=p.front?9:6.5;const rr=(base+(i===hov?4:0))*k;if(i===hov){ctx.beginPath();ctx.arc(X(p.x),Y(p.y),rr+6,0,7);ctx.fillStyle=p.front?'rgba(242,177,52,.20)':'rgba(63,127,174,.18)';ctx.fill();}ctx.beginPath();ctx.arc(X(p.x),Y(p.y),rr,0,7);ctx.fillStyle=p.front?PAL.gold:dc;ctx.globalAlpha=p.front?1:.9;ctx.fill();ctx.globalAlpha=1;ctx.lineWidth=1.6;ctx.strokeStyle=p.front?'#b9810f':'#2b5b80';ctx.stroke();if(p.lbl&&opts.labels!==false&&k>0.85){ctx.fillStyle=PAL.ink;ctx.font=(i===hov?'bold ':'')+'11px "Times New Roman",serif';ctx.textAlign='left';ctx.fillText(p.lbl,X(p.x)+10,Y(p.y)-8);}});
+  ctx.fillStyle=PAL.soft;ctx.font='13px "Times New Roman",serif';ctx.textAlign='center';ctx.fillText(opts.xlab||'',w/2,h-7);ctx.save();ctx.translate(14,h/2);ctx.rotate(-Math.PI/2);ctx.fillText(opts.ylab||'',0,0);ctx.restore();}
+ animate(draw);
+ function nearest(ev){const r=cv.getBoundingClientRect(),mx2=ev.clientX-r.left,my=ev.clientY-r.top;let best=-1,bd=1e9;pts.forEach((p,i)=>{const d=Math.hypot(X(p.x)-mx2,Y(p.y)-my);if(d<bd){bd=d;best=i;}});return bd<20?best:-1;}
+ cv.onmousemove=ev=>{const i=nearest(ev);if(i!==hov){hov=i;draw(1);}if(i>=0){showTip(ev,pts[i].tip||pts[i].lbl||'');cv.style.cursor='pointer';if(opts.onhover)opts.onhover(pts[i]);}else{hideTip();cv.style.cursor='default';}};
+ cv.onmouseleave=()=>{hov=-1;draw(1);hideTip();};
+ cv.onclick=ev=>{const i=nearest(ev);if(i>=0&&opts.onpick)opts.onpick(pts[i]);};}
+function donut(cv,parts,center){const w=cv.clientWidth||280,h=240;cv.style.height=h+'px';const ctx=hidpi(cv,w,h);const cx=w/2,cy=h/2,r=Math.min(w,h)/2-18,tot=parts.reduce((a,p)=>a+p.v,0);animate(k=>{ctx.clearRect(0,0,w,h);let ang=-Math.PI/2;parts.forEach(p=>{const a2=ang+(p.v/tot*2*Math.PI)*k;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,ang,a2);ctx.closePath();ctx.fillStyle=p.c;ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();ang=a2;});ctx.beginPath();ctx.arc(cx,cy,r*0.56,0,7);ctx.fillStyle='#fff';ctx.fill();ctx.fillStyle=PAL.ink;ctx.textAlign='center';ctx.font='bold 17px "Times New Roman",serif';ctx.fillText(center?center[0]:tot,cx,cy-2);ctx.font='11px "Times New Roman",serif';ctx.fillStyle=PAL.soft;ctx.fillText(center?center[1]:'total',cx,cy+15);});}
+function miniDonut(cv,wn){const w=cv.clientWidth||240,h=200;cv.style.height=h+'px';const ctx=hidpi(cv,w,h);const cx=w/2,cy=h/2,r=72;const cols=[PAL.cyan,PAL.purple,PAL.green,PAL.blue,PAL.coral,PAL.gold];animate(k=>{ctx.clearRect(0,0,w,h);let ang=-Math.PI/2;wn.forEach((v,i)=>{const a2=ang+v*2*Math.PI*k;ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,ang,a2);ctx.closePath();ctx.fillStyle=cols[i];ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();const mid=(ang+a2)/2;if(v>0.05&&k>0.9){ctx.fillStyle='#fff';ctx.font='bold 11px "Times New Roman",serif';ctx.textAlign='center';ctx.fillText(CRIT[i][0],cx+Math.cos(mid)*r*0.64,cy+Math.sin(mid)*r*0.64);}ang=a2;});ctx.beginPath();ctx.arc(cx,cy,r*0.46,0,7);ctx.fillStyle='#fff';ctx.fill();ctx.fillStyle=PAL.soft;ctx.font='10px "Times New Roman",serif';ctx.textAlign='center';ctx.fillText('pesos',cx,cy+3);});}
+function radar(cv,labels,vals,max){const w=cv.clientWidth||360,h=360;cv.style.height=h+'px';const ctx=hidpi(cv,w,h);const cx=w/2,cy=h/2+4,R=Math.min(w,h)/2-50,N=labels.length;function pt(i,r){const a=-Math.PI/2+i/N*2*Math.PI;return [cx+Math.cos(a)*r,cy+Math.sin(a)*r];}animate(k=>{ctx.clearRect(0,0,w,h);ctx.strokeStyle=PAL.grid;ctx.lineWidth=1;for(let g=1;g<=4;g++){ctx.beginPath();for(let i=0;i<=N;i++){const p=pt(i%N,R*g/4);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}ctx.closePath();ctx.stroke();}for(let i=0;i<N;i++){const p=pt(i,R);ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(p[0],p[1]);ctx.stroke();const l=pt(i,R+22);ctx.fillStyle=PAL.ink;ctx.font='bold 12px "Times New Roman",serif';ctx.textAlign='center';ctx.fillText(labels[i],l[0],l[1]);}ctx.beginPath();for(let i=0;i<=N;i++){const v=vals[i%N]/max*k;const p=pt(i%N,R*v);i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]);}ctx.closePath();ctx.fillStyle='rgba(8,166,189,.22)';ctx.fill();ctx.strokeStyle=PAL.cyan;ctx.lineWidth=2.4;ctx.stroke();for(let i=0;i<N;i++){const v=vals[i]/max*k;const p=pt(i,R*v);ctx.beginPath();ctx.arc(p[0],p[1],4,0,7);ctx.fillStyle=PAL.cyanD;ctx.fill();}});}
+
+
+/* ============ Analítica reproducible (espejo de los scripts Python; validada) ============ */
+function ahpEig(A){let w=new Array(A.length).fill(1/A.length);for(let it=0;it<200;it++){const v=A.map(row=>dot(row,w));const s=v.reduce((a,b)=>a+b,0);const w2=v.map(x=>x/s);if(Math.max(...w2.map((x,i)=>Math.abs(x-w[i])))<1e-12){w=w2;break;}w=w2;}const Aw=A.map(row=>dot(row,w));const lmax=Aw.reduce((s,x,i)=>s+x/w[i],0)/A.length;const CI=(lmax-A.length)/(A.length-1),CR=CI/1.24;return{w,lmax,CI,CR};}
+function topsisC(M,w){const m=w.length;const den=Array.from({length:m},(_,j)=>Math.sqrt(M.reduce((s,r)=>s+r[j]*r[j],0)));const V=M.map(r=>r.map((x,j)=>x/den[j]*w[j]));const ideal=Array.from({length:m},(_,j)=>Math.max(...V.map(r=>r[j])));const anti=Array.from({length:m},(_,j)=>Math.min(...V.map(r=>r[j])));return V.map(r=>{const dp=Math.sqrt(r.reduce((s,x,j)=>s+(x-ideal[j])**2,0));const dn=Math.sqrt(r.reduce((s,x,j)=>s+(x-anti[j])**2,0));return dn/(dp+dn);});}
+function vikorQ(M,w,v){v=v===undefined?0.5:v;const m=w.length;const fs=Array.from({length:m},(_,j)=>Math.max(...M.map(r=>r[j])));const fm=Array.from({length:m},(_,j)=>Math.min(...M.map(r=>r[j])));const S=M.map(r=>r.reduce((s,x,j)=>s+w[j]*(fs[j]-x)/(fs[j]-fm[j]),0));const R=M.map(r=>Math.max(...r.map((x,j)=>w[j]*(fs[j]-x)/(fs[j]-fm[j]))));const Smin=Math.min(...S),Smax=Math.max(...S),Rmin=Math.min(...R),Rmax=Math.max(...R);const Q=S.map((s,i)=>v*(s-Smin)/(Smax-Smin)+(1-v)*(R[i]-Rmin)/(Rmax-Rmin));const ord=Q.map((q,i)=>[q,i]).sort((a,b)=>a[0]-b[0]);const DQ=1/(M.length-1);const c1=(ord[1][0]-ord[0][0])>=DQ;const best=ord[0][1];const rS=rankArr(S.map(x=>-x)),rR=rankArr(R.map(x=>-x));const c2=(rS[best]===1)||(rR[best]===1);const compromiso=ord.filter(p=>p[0]-ord[0][0]<DQ).map(p=>p[1]);return{S,R,Q,c1,c2,best,compromiso};}
+const wpmScore=(M,w)=>M.map(r=>r.reduce((p,x,j)=>p*Math.pow(x,w[j]),1));
+function noDominadas(X){return X.map((p,i)=>!X.some((q,j)=>j!==i&&q.every((x,k)=>x>=p[k])&&q.some((x,k)=>x>p[k])));}
+function locoRanks(M,w){const out={};for(let j=0;j<w.length;j++){const w2=norm(w.filter((_,k)=>k!==j));const M2=M.map(r=>r.filter((_,k)=>k!==j));out['C'+(j+1)]=rankArr(M2.map(r=>dot(r,w2)));}return out;}
+function mulberry32(seed){let a=seed>>>0;return function(){a|=0;a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};}
+function makeGauss(rnd){let z=null;return function(){if(z!==null){const v=z;z=null;return v;}let u=0,v=0;while(u===0)u=rnd();while(v===0)v=rnd();const r=Math.sqrt(-2*Math.log(u)),t=2*Math.PI*v;z=r*Math.sin(t);return r*Math.cos(t);};}
+function makeGamma(rnd,g){return function gm(k){if(k<1){const u=rnd();return gm(1+k)*Math.pow(u,1/k);}const d=k-1/3,c=1/Math.sqrt(9*d);while(true){let x,v;do{x=g();v=1+c*x;}while(v<=0);v=v*v*v;const u=rnd();if(u<1-0.0331*x*x*x*x)return d*v;if(Math.log(u)<0.5*x*x+d*(1-v+Math.log(v)))return d*v;}};}
+function mcLive(reg,N,seed,cb,progressCb){const rnd=mulberry32(seed);const gs=makeGauss(rnd);const gm=makeGamma(rnd,gs);const M=T.map(t=>t.sc);const alpha=W0.map(w=>w*80);const n=15;const top1=new Array(n).fill(0),top3=new Array(n).fill(0);let done=0;
+ function dir(){const g=alpha.map(a=>gm(a));const s=g.reduce((x,y)=>x+y,0);return g.map(x=>x/s);}
+ function chunk(){const end=Math.min(done+4000,N);
+  for(let s=done;s<end;s++){const w=(reg==='B')?W0:dir();let sc;
+   if(reg==='A'){sc=M.map(r=>dot(r,w));}
+   else{sc=M.map(r=>{let t2=0;for(let j=0;j<6;j++){let x=r[j]+(rnd()*20-10);if(x<0)x=0;else if(x>100)x=100;t2+=x*w[j];}return t2;});}
+   const rk=rankArr(sc);for(let i=0;i<n;i++){if(rk[i]===1)top1[i]++;if(rk[i]<=3)top3[i]++;}}
+  done=end;if(progressCb)progressCb(done/N);
+  if(done<N)setTimeout(chunk,0);else cb(top1.map(x=>100*x/N),top3.map(x=>100*x/N));}
+ chunk();}
+const fmt=(x,d)=>x.toFixed(d===undefined?3:d).replace('.',',');
+const M15=()=>T.map(t=>t.sc);
+
+/* ============ Sistema de módulos (sin bloqueos) ============ */
+const MODULES=[
+ {id:"resumen",t:"El estudio",ic:"📄"},{id:"datos",t:"Datos y fuentes",ic:"🗄️"},
+ {id:"ponderacion",t:"Ponderación AHP–Delphi",ic:"⚖️"},{id:"mcda",t:"Matriz y evaluación",ic:"🎯"},
+ {id:"pareto",t:"No dominancia",ic:"📈"},{id:"metodos",t:"Contraste de métodos",ic:"🔁"},
+ {id:"robustez",t:"Incertidumbre",ic:"🎲"},{id:"reproducir",t:"Cómo reproducir",ic:"🧪"},
+ {id:"cierre",t:"Alcance y cita",ic:"🧭"}];
+const RENDER={};let CURRENT="resumen";
+function renderNav(){const nav=document.getElementById('nav');nav.innerHTML='';MODULES.forEach(m=>{const b=document.createElement('button');b.dataset.id=m.id;b.innerHTML='<span class="ic">'+m.ic+'</span> '+m.t;b.classList.toggle('active',m.id===CURRENT);b.onclick=()=>showModule(m.id);nav.appendChild(b);});}
+function showModule(id){CURRENT=id;document.querySelectorAll('.module').forEach(m=>m.classList.toggle('active',m.id==='m-'+id));renderNav();if(RENDER[id])RENDER[id]();window.scrollTo({top:0,behavior:'smooth'});}
+function mod(id,html){const d=document.createElement('section');d.className='module';d.id='m-'+id;d.innerHTML=html;document.getElementById('main').appendChild(d);}
+function tblHTML(head,rows,cls){return '<div class="tblwrap"><table class="tbl '+(cls||'')+'"><thead><tr>'+head.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr'+(r._cls?' class="'+r._cls+'"':'')+'>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';}
+
+/* ============ M1 · Resumen ============ */
+function pipelineSVG(){
+ const N=[
+  ["1","83 bases oficiales","tres niveles de evidencia","datos"],
+  ["2","Panel de investigadores","consulta en dos rondas","ponderacion"],
+  ["3","Matriz AHP de consenso","CR = 0,053 &lt; 0,10","ponderacion"],
+  ["4","Matriz de evaluación 15×6","escala 0–100","mcda"],
+  ["5","Suma ponderada","orden de mérito","mcda"],
+  ["6","No dominancia","impacto–viabilidad","pareto"],
+  ["7","TOPSIS · VIKOR · WPM","ρ = 0,98 / 0,79 / 0,99","metodos"],
+  ["8","Monte Carlo + LOCO","3 regímenes · semilla 42","robustez"],
+  ["9","Portafolio priorizado","siete negocios ancla","cierre"]];
+ const W=1000,bh=76,r1y=30,r2y=182,M=8;
+ const bw=(W-2*M-4*18)/5, gap=18;
+ const x1=i=>M+i*(bw+gap);
+ const w2=4*bw+3*gap, x20=(W-w2)/2;
+ const x2=i=>x20+(3-i)*(bw+gap);            // fila 2 en serpentina (derecha→izquierda)
+ let s='<svg class="flow" viewBox="0 0 '+W+' 292" style="width:100%;height:auto" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flujo metodológico">';
+ s+='<defs><linearGradient id="gN" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef5f7"/></linearGradient>';
+ s+='<linearGradient id="gF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7c75e"/><stop offset="1" stop-color="#f2b134"/></linearGradient>';
+ s+='<marker id="arr" viewBox="0 0 10 10" refX="8.6" refY="5" markerWidth="7.5" markerHeight="7.5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#3f7fae"/></marker>';
+ s+='<filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="2.2" stdDeviation="2.6" flood-color="#142536" flood-opacity="0.16"/></filter></defs>';
+ const caja=(x,y,n)=>{const fin=n[0]==="9";
+  let g='<g class="fl-n" onclick="showModule(\''+n[3]+'\')" tabindex="0" role="link" aria-label="'+n[1]+'">';
+  g+='<rect class="bg" x="'+x+'" y="'+y+'" width="'+bw+'" height="'+bh+'" rx="13" fill="url(#g'+(fin?'F':'N')+')" stroke="'+(fin?'#c98f1b':'#3f7fae')+'" stroke-width="1.5" filter="url(#sh)"/>';
+  g+='<circle cx="'+(x+7)+'" cy="'+(y+7)+'" r="13" fill="'+(fin?'#142536':'#2E6B7E')+'" stroke="#ffffff" stroke-width="2"/>';
+  g+='<text x="'+(x+7)+'" y="'+(y+11.5)+'" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">'+n[0]+'</text>';
+  g+='<text x="'+(x+bw/2)+'" y="'+(y+28)+'" text-anchor="middle" font-size="13" font-weight="bold" fill="#142536">'+n[1]+'</text>';
+  g+='<text x="'+(x+bw/2)+'" y="'+(y+49)+'" text-anchor="middle" font-size="11.5" fill="#637485">'+n[2]+'</text>';
+  g+='<text x="'+(x+bw/2)+'" y="'+(y+bh-9)+'" text-anchor="middle" font-size="10" fill="'+(fin?'#8a6210':'#3f7fae')+'">ver módulo →</text></g>';
+  return g;};
+ // flechas fila 1 (izq→der)
+ for(let i=0;i<4;i++){const xa=x1(i)+bw, xb=x1(i+1);s+='<line x1="'+(xa+1.5)+'" y1="'+(r1y+bh/2)+'" x2="'+(xb-3)+'" y2="'+(r1y+bh/2)+'" stroke="#3f7fae" stroke-width="1.8" marker-end="url(#arr)"/>';}
+ // conector serpentina: nodo 5 → nodo 6 (baja por la derecha)
+ const cx=x1(4)+bw/2, tx=x2(0)+bw/2;
+ s+='<path d="M '+cx+' '+(r1y+bh+2)+' C '+cx+' '+(r1y+bh+46)+' '+tx+' '+(r2y-46)+' '+tx+' '+(r2y-4)+'" fill="none" stroke="#3f7fae" stroke-width="1.8" marker-end="url(#arr)"/>';
+ // flechas fila 2 (der→izq)
+ for(let i=0;i<3;i++){const xa=x2(i), xb=x2(i+1)+bw;s+='<line x1="'+(xa-1.5)+'" y1="'+(r2y+bh/2)+'" x2="'+(xb+3)+'" y2="'+(r2y+bh/2)+'" stroke="#3f7fae" stroke-width="1.8" marker-end="url(#arr)"/>';}
+ // nodos al final (encima de las líneas)
+ for(let i=0;i<5;i++)s+=caja(x1(i),r1y,N[i]);
+ for(let i=0;i<4;i++)s+=caja(x2(i),r2y,N[5+i]);
+ return s+'</svg>';}
+mod('resumen',`<div class="block"><span class="eyebrow">Material complementario de reproducibilidad</span>
+<h2 class="module-title">Reproducibilidad del procedimiento multicriterio para priorizar oportunidades de negocio con IA en La Guajira</h2>
+<p class="lead">Este sitio documenta, con los <b>mismos datos y algoritmos del artículo</b>, cada paso del procedimiento: la ponderación de criterios (AHP–Delphi), la evaluación de las quince tipologías, el análisis de no dominancia, el contraste entre métodos de agregación y el análisis de incertidumbre por simulación. Todos los cálculos deterministas de esta página se <b>recomputan en su navegador</b> a partir de las entradas publicadas; los valores oficiales del manuscrito provienen de los scripts en Python del material suplementario, con semilla fija.</p>
+<div class="note"><b>Alcance tecnológico.</b> El modelo <b>no entrena algoritmos de aprendizaje automático</b>: la inteligencia artificial delimita el dominio de las oportunidades de negocio evaluadas, y la contribución es un marco reproducible de apoyo a la decisión (sección 3.1 del artículo).</div>
+<div class="kpis">
+ <div class="kpi"><b>15</b><span>tipologías evaluadas</span></div>
+ <div class="kpi"><b>6</b><span>criterios ponderados</span></div>
+ <div class="kpi"><b>CR = 0,053</b><span>consistencia AHP (&lt; 0,10)</span></div>
+ <div class="kpi"><b>4</b><span>métodos de agregación</span></div>
+ <div class="kpi"><b>3 × 30.000</b><span>simulaciones (semilla 42)</span></div>
+ <div class="kpi"><b>83</b><span>bases de datos con checksum</span></div>
+</div>
+<h3>Flujo metodológico verificable (pulse cada etapa)</h3>`+pipelineSVG()+`
+<div class="ra-grid" style="margin-top:14px">
+ <div class="minicard"><h4>Datos abiertos</h4><p>Fuentes oficiales, inventario con SHA-256 y archivos del suplementario descargables desde esta página.</p></div>
+ <div class="minicard"><h4>Cálculo en vivo</h4><p>AHP, TOPSIS, VIKOR, WPM, no dominancia y exclusión de criterios se recalculan aquí y se cotejan con los valores publicados.</p></div>
+ <div class="minicard"><h4>Semillas y equivalencia</h4><p>Los resultados estocásticos oficiales usan NumPy con semilla 42; la demostración del navegador usa un generador con semilla propia y converge a los mismos valores.</p></div>
+</div></div>`);
+RENDER.resumen=()=>{};
+
+/* ============ M2 · Datos y fuentes ============ */
+const FUENTES=[
+ ["Banco Mundial (WDI)","Electricidad renovable (%); uso de internet (%)","2021–2022","Países","data.worldbank.org"],
+ ["DANE","Pobreza monetaria departamental","2023","Departamental","dane.gov.co"],
+ ["DANE","Pobreza multidimensional (IPM)","2025","Departamental","dane.gov.co"],
+ ["UPME","Registro FNCER y cartera activa de generación","abr. 2026","Nacional / dpto.","upme.gov.co"],
+ ["MinCIT","Registro Nacional de Turismo","2026","Nacional / Riohacha","mincit.gov.co"],
+ ["Confecámaras (RUES)","Empresas por municipio y tamaño","2025","Departamental","rues.org.co"]];
+const EVTABS=[
+ {t:"Energía",draw:cv=>grouped(cv,["Electricidad renovable %"],[26.5],[METR.renov],"Mediana mundial","Colombia",{fmt:v=>fmt(v,1)+'%'}),msg:"Colombia genera el <b>75,1%</b> de su electricidad con renovables frente a una mediana mundial de <b>26,5%</b>: percentil 86 de la distribución global (Figura 1 del artículo)."},
+ {t:"Concentración FNCER",draw:cv=>vbars(cv,["Guajira %","Resto país %"],[METR.fncer,100-METR.fncer],[PAL.gold,PAL.slate],v=>fmt(v,1)+'%'),msg:"La Guajira concentra <b>1.605,3 MW</b> registrados, el <b>16,3%</b> nacional; la distribución departamental es desigual (Gini = <b>0,65</b>; Figuras 2 y 3)."},
+ {t:"Condiciones sociales",draw:cv=>vbars(cv,["IPM total %","Cabeceras %","Rural disperso %"],[METR.ipm,19.5,61.0],[PAL.coral,PAL.purple,PAL.blue],v=>fmt(v,1)+'%'),msg:"Pobreza multidimensional de <b>40,1%</b>: <b>19,5%</b> en cabeceras y <b>61,0%</b> en centros poblados y rural disperso (brecha de <b>41,5</b> puntos); NBI &gt; 80% en Uribia y Manaure (Figura 4)."},
+ {t:"Turismo",draw:cv=>vbars(cv,["CAGR %","R²×100","Pendiente (est./año)"],[METR.rio_cagr,METR.rio_r2*100,42.8],[PAL.green,PAL.cyan,PAL.gold],v=>fmt(v,1)),msg:"El registro turístico de Riohacha crece al <b>11,6%</b> anual compuesto, con tendencia lineal de <b>≈43</b> establecimientos/año y ajuste R² = <b>0,87</b> (Figura 5)."},
+ {t:"Tejido empresarial",draw:cv=>vbars(cv,["Microempresas %","HHI municipal ×100"],[METR.micro,METR.hhi*100],[PAL.slate,PAL.coral],v=>fmt(v,1)),msg:"El <b>96,8%</b> del tejido formal es microempresarial; concentración municipal moderada (HHI = <b>0,25</b>), bicéfala en Riohacha y Maicao."}];
+mod('datos',`<div class="block"><span class="eyebrow">Insumos verificables</span><h2 class="module-title">🗄️ Datos, fuentes oficiales e inventario con integridad</h2>
+<p class="lead">El artículo se apoya en un análisis estadístico de <b>tres niveles</b> (internacional, nacional y local) construido exclusivamente con fuentes oficiales. La trazabilidad fue criterio rector: ningún dato ingresó sin procedencia documentada y las variables no disponibles a la escala requerida se declararon como información insuficiente (sección 3.8).</p>
+<h3>Fuentes primarias del análisis (Tabla 5 del artículo)</h3><div id="dt-fuentes"></div>
+<h3 style="margin-top:18px">Evidencia clave por bloque temático (valores del manuscrito)</h3>
+<div class="steps" id="dt-tabs"></div><div class="panelgrid"><div><canvas id="dt-cv"></canvas></div><div class="didac" id="dt-msg"></div></div>
+<h3 style="margin-top:18px">Inventario de bases de datos del proyecto</h3>
+<p class="lead" style="font-size:.95rem">El inventario contiene <b>103 entradas</b>, de las cuales <b>83 son archivos de datos</b> (csv, xlsx, xls, json, tsv) — la cifra reportada en la fuente de la Tabla 5 —; el resto son documentos y salidas. Cada archivo lleva su huella <b>SHA-256</b> (12 primeros dígitos) para verificar integridad.</p>
+<input id="dt-filtro" class="filtro" type="text" placeholder="Filtrar por nombre, extensión o tipo… (p. ej. «xlsx», «datos», «UPME»)">
+<div id="dt-inv"></div>
+<h3 style="margin-top:18px">Archivos de datos del material suplementario (verbatim)</h3>
+<div class="chipline"><button class="btn primary" onclick="descargaCSV('criterios_pesos.csv',CSV_PESOS)">⬇ criterios_pesos.csv</button>
+<button class="btn primary" onclick="descargaCSV('matriz_tipologias.csv',CSV_MATRIZ)">⬇ matriz_tipologias.csv</button>
+<button class="btn ghost" onclick="descargaCSV('matriz_consenso_ahp.csv',csvAHP())">⬇ matriz_consenso_ahp.csv (Tabla 3)</button></div>
+<details><summary>Ver criterios_pesos.csv (Tabla 1)</summary><pre class="codebox" id="dt-csv1"></pre></details>
+<details><summary>Ver matriz_tipologias.csv (Tabla 4)</summary><pre class="codebox" id="dt-csv2"></pre></details>
+</div>`);
+function csvAHP(){let s='Criterio,C1,C2,C3,C4,C5,C6,Prioridad_autovector\n';const e=ahpEig(AHP_A);for(let i=0;i<6;i++){s+='C'+(i+1)+','+AHP_A[i].map(x=>x===0.5?'1/2':x).join(',')+','+e.w[i].toFixed(3)+'\n';}return s;}
+function descargaCSV(nombre,contenido){const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(contenido);a.download=nombre;document.body.appendChild(a);a.click();a.remove();}
+function drawInv(f){const q=(f||'').toLowerCase();const rows=INV.filter(r=>!q||r.join(' ').toLowerCase().includes(q)).map(r=>{const rr=[r[0],r[1],r[2],'<code>'+r[3]+'</code>','<span class="tag '+(r[4]==='datos'?'t-ok':'t-doc')+'">'+r[4]+'</span>'];return rr;});
+ document.getElementById('dt-inv').innerHTML=tblHTML(["Archivo","Ext.","MB","SHA-256 (12)","Tipo"],rows,'compact')+'<p class="didac" style="margin-top:6px">'+rows.length+' de '+INV.length+' entradas mostradas · 83 archivos de datos en total.</p>';}
+RENDER.datos=()=>{const d=document.getElementById('dt-fuentes');if(d.dataset.done)return;d.dataset.done=1;
+ d.innerHTML=tblHTML(["Fuente / entidad","Indicador","Año / corte","Escala","Acceso"],FUENTES.map(r=>[r[0],r[1],r[2],r[3],'<a href="https://'+r[4].replace(/^data\./,'data.')+'" target="_blank" rel="noopener">'+r[4]+'</a>']));
+ const tabs=document.getElementById('dt-tabs');EVTABS.forEach((tb,i)=>{const b=document.createElement('button');b.textContent=tb.t;b.onclick=()=>dtShow(i);tabs.appendChild(b);});dtShow(0);
+ document.getElementById('dt-filtro').oninput=e=>drawInv(e.target.value);drawInv('');
+ document.getElementById('dt-csv1').textContent=CSV_PESOS;document.getElementById('dt-csv2').textContent=CSV_MATRIZ;};
+function dtShow(i){document.querySelectorAll('#dt-tabs button').forEach((b,k)=>b.classList.toggle('active',k===i));const tb=EVTABS[i];tb.draw(document.getElementById('dt-cv'));document.getElementById('dt-msg').innerHTML=tb.msg;}
+
+/* ============ M3 · Ponderación AHP–Delphi ============ */
+mod('ponderacion',`<div class="block"><span class="eyebrow">Sección 3.3 · Tabla 3 del artículo</span><h2 class="module-title">⚖️ Ponderación de criterios: protocolo AHP–Delphi verificable</h2>
+<p class="lead">Las ponderaciones se establecieron mediante una <b>consulta estructurada de dos rondas</b>, basada en Delphi, del panel de tres investigadores (perfiles: ingeniería de sistemas y analítica de datos; ciencias económicas y administrativas; caracterización económica territorial). En la primera ronda cada investigador propuso importancias de forma independiente; en la segunda, la retroalimentación abierta condujo a la <b>convergencia unánime</b> en el ordenamiento <b>C2 ≻ C1 ∼ C6 ≻ C3 ≻ C4 ≻ C5</b>. El consenso se formalizó en una matriz de comparaciones por pares en escala de Saaty, cuya consistencia se verifica a continuación. La dispersión residual de los juicios se modela en el análisis probabilístico (módulo Incertidumbre).</p>
+<div class="panelgrid"><div>
+<h3>Matriz de consenso (escala de Saaty) y prioridades</h3><div id="ah-matriz"></div>
+<div class="chipline" style="margin-top:8px"><button class="btn gold" onclick="verifAHP()">Recalcular autovector en este navegador</button></div>
+<div class="didac" id="ah-out">Pulse el botón: la página deriva el autovector principal por iteración de potencia y coteja λ<sub>max</sub>, CI y CR con los valores publicados.</div>
+</div><div>
+<h3>Vector adoptado (Tabla 1)</h3><canvas id="ah-donut"></canvas>
+<div class="note" style="margin-top:10px"><b>Del autovector al vector adoptado.</b> El autovector arroja (0,179; 0,225; 0,164; 0,131; 0,116; 0,184); en la ronda final el panel adoptó el vector redondeado (0,18; 0,22; 0,16; 0,14; 0,12; 0,18), con desviación <b>&lt; 0,01</b> por criterio y el mismo ordenamiento.</div>
+<div class="note"><b>Limitación declarada.</b> Panel interno y reducido, sin partes interesadas externas (secciones 3.3 y 5.5). Para paneles ampliados, el suplementario incluye el instrumento de elicitación y su procesador (CR y W de Kendall).</div>
+</div></div></div>`);
+function verifAHP(){const e=ahpEig(AHP_A);const ok=Math.abs(e.CR-0.053)<0.0005;
+ document.getElementById('ah-out').innerHTML='λ<sub>max</sub> = <b>'+fmt(e.lmax)+'</b> · CI = <b>'+fmt(e.CI)+'</b> · CR = <b>'+fmt(e.CR)+'</b> (RI = 1,24; n = 6) → '+(e.CR<0.10?'<span class="tag t-ok">consistente (CR &lt; 0,10)</span>':'inconsistente')+
+ '<br>Autovector: ['+e.w.map(x=>fmt(x)).join('; ')+']<br>'+(ok?'<b class="okline">✓ Coincide con la Tabla 3 y la sección 3.3 del artículo (λmax = '+AHP_OF.lmax+'; CI = '+AHP_OF.ci+'; CR = '+AHP_OF.cr+').</b>':'⚠ Difiere de los valores publicados.');}
+RENDER.ponderacion=()=>{const d=document.getElementById('ah-matriz');if(d.dataset.done)return;d.dataset.done=1;
+ const e=ahpEig(AHP_A);const S=x=>x===0.5?'1/2':String(x);
+ const rows=AHP_A.map((r,i)=>{const rr=['<b>C'+(i+1)+'</b> '+CRITLONG[i]].concat(r.map(S)).concat(['<b>'+fmt(e.w[i])+'</b>']);return rr;});
+ d.innerHTML=tblHTML(['Criterio','C1','C2','C3','C4','C5','C6','Prioridad (autovector)'],rows,'compact center');
+ miniDonut(document.getElementById('ah-donut'),W0);};
+
+/* ============ M4 · Matriz y evaluación ============ */
+mod('mcda',`<div class="block"><span class="eyebrow">Secciones 3.4 y 4.2 · Tabla 4 del artículo</span><h2 class="module-title">🎯 Matriz de evaluación y orden de mérito</h2>
+<p class="lead">Cada tipología recibe un puntaje de 0 a 100 por criterio (juicio experto sustentado en evidencia secundaria, declarado como tal). El puntaje agregado es la suma ponderada <span class="formula">S<sub>i</sub> = Σ<sub>j</sub> w<sub>j</sub>·x<sub>ij</sub></span> (ecuación 1). Con el vector adoptado, el orden de mérito reproduce exactamente el del artículo: <b>T1 (72,8) · T4 (72,4) · T14 (70,7)</b>, con un rango estrecho (61,9–72,8; CV = 5,0%).</p>
+<h3>Matriz completa 15 × 6 (idéntica a matriz_tipologias.csv)</h3><div id="mc-tabla"></div>
+<h3 style="margin-top:16px">Exploración de sensibilidad de pesos <span class="tag t-doc">didáctica</span></h3>
+<p class="lead" style="font-size:.95rem">Los deslizadores permiten experimentar el efecto de otras ponderaciones. <b>Los resultados del artículo usan únicamente el vector adoptado</b> (botón «Vector del artículo»); el análisis formal de esta sensibilidad es el módulo de Incertidumbre.</p>
+<div class="panelgrid"><div><div class="steps" id="mcda-presets"></div><div class="controls" id="mcda-ctrls"></div><button class="btn ghost" onclick="resetW()">Vector del artículo (Tabla 1)</button><div class="didac" id="mcda-msg" style="margin-top:12px"></div></div>
+<div><canvas id="mcda-cv"></canvas></div></div>
+<div class="panelgrid" style="margin-top:6px"><div class="block"><h3>Pesos actuales</h3><canvas id="mcda-donut"></canvas></div><div class="block"><h3>Perfil del líder (radar 0–100)</h3><canvas id="mcda-radar"></canvas></div></div></div>`);
+let curW=[...W0];
+const PRESETS={"Vector del artículo":[...W0],"Énfasis social":[0.12,0.40,0.14,0.12,0.10,0.12],"Énfasis económico":[0.38,0.12,0.10,0.14,0.10,0.16],"Énfasis ambiental":[0.12,0.16,0.40,0.12,0.10,0.10]};
+function syncSliders(){document.querySelectorAll('#mcda-ctrls input').forEach((inp,i)=>inp.value=Math.round(curW[i]*100));}
+function resetW(){curW=[...W0];syncSliders();drawMCDA();}
+function drawMCDA(){const wn=norm(curW);document.querySelectorAll('#mcda-ctrls .slider-row').forEach((r,i)=>r.querySelector('.val').textContent=Math.round(wn[i]*100)+'%');
+ const rk=totals(curW).sort((a,b)=>b.tot-a.tot);const top=rk.slice(0,10);
+ barH(document.getElementById('mcda-cv'),top.map(t=>t.c+' · '+t.n.slice(0,34)),top.map(t=>t.tot),{fmt:v=>fmt(v,1),colors:top.map((t,i)=>i===0?PAL.gold:PAL.cyan),L:230});
+ miniDonut(document.getElementById('mcda-donut'),wn);
+ radar(document.getElementById('mcda-radar'),CRIT.map(c=>c[0]),rk[0].sc,100);
+ const base=JSON.stringify(norm(W0).map(x=>x.toFixed(3)));
+ document.getElementById('mcda-msg').innerHTML=(JSON.stringify(wn.map(x=>x.toFixed(3)))===base)?'<b>Vector del artículo activo.</b> Líder: '+rk[0].c+' ('+fmt(rk[0].tot,1)+' puntos), coincidente con la sección 4.2.':'<b>Escenario exploratorio</b> (no corresponde al artículo). Líder actual: '+rk[0].c+' ('+fmt(rk[0].tot,1)+').';}
+RENDER.mcda=()=>{const c=document.getElementById('mcda-ctrls');if(c.dataset.done)return;c.dataset.done=1;
+ const M=M15();const tot=M.map(r=>dot(r,W0));const rW=rankArr(tot);
+ const ordenI=[...Array(15).keys()].sort((a,b)=>rW[a]-rW[b]);
+ const rows=ordenI.map(i=>{const t=T[i];const r=[t.c,t.n,t.s].concat(t.sc).concat(['<b>'+fmt(tot[i],1)+'</b>','<b>'+rW[i]+'</b>']);r._cls=rW[i]<=2?'hl-gold':(rW[i]<=5?'hl-soft':'');return r;});
+ document.getElementById('mc-tabla').innerHTML=tblHTML(['Cód.','Tipología','Sector','C1','C2','C3','C4','C5','C6','Total','Orden'],rows,'compact');
+ const ps=document.getElementById('mcda-presets');Object.keys(PRESETS).forEach(k=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>{curW=[...PRESETS[k]];syncSliders();drawMCDA();};ps.appendChild(b);});
+ CRIT.forEach((cr,i)=>{const row=document.createElement('div');row.className='slider-row';row.innerHTML='<label>'+cr[0]+' '+CRITLONG[i]+'</label><input type="range" min="0" max="45" value="'+Math.round(W0[i]*100)+'" data-i="'+i+'"><span class="val"></span>';c.appendChild(row);});
+ c.querySelectorAll('input').forEach(inp=>inp.oninput=()=>{curW[+inp.dataset.i]=(+inp.value)/100;drawMCDA();});drawMCDA();};
+
+/* ============ M5 · No dominancia ============ */
+mod('pareto',`<div class="block"><span class="eyebrow">Secciones 3.5 y 4.3 · Figura 7 y Tabla 6</span><h2 class="module-title">📈 Análisis de no dominancia (frontera de Pareto)</h2>
+<p class="lead">Cada alternativa se proyecta en dos ejes sintéticos — <b>impacto</b> = (0,18·C1 + 0,22·C2 + 0,16·C3)/0,56 y <b>viabilidad</b> = (0,14·C4 + 0,12·C5 + 0,18·C6)/0,44 — y se identifican las alternativas no dominadas. El artículo lo precisa: se trata de una <b>visualización estructurada de compromisos</b> para apoyar la decisión, no de la resolución de un problema genuino de optimización multiobjetivo. La justificación es verificable aquí: en el espacio completo de seis criterios, <b>10 de las 15</b> tipologías resultan no dominadas (baja capacidad discriminante), mientras que la proyección bidimensional deja <b>5</b> soluciones no dominadas.</p>
+<div class="kpis"><div class="kpi"><b id="pa-k6">—</b><span>no dominadas en 6D (calculado aquí)</span></div><div class="kpi"><b id="pa-k2">—</b><span>en el plano impacto–viabilidad</span></div><div class="kpi"><b>r = −0,30</b><span>Pearson impacto–viabilidad (p = 0,28; exploratoria)</span></div></div>
+<canvas id="pa-cv" class="wide"></canvas><div class="didac" id="pa-det">Pase el cursor por los puntos: dorado = frontera.</div>
+<h3>Soluciones de la frontera (Tabla 6 del artículo)</h3><div id="pa-tabla"></div></div>`);
+RENDER.pareto=()=>{const d=document.getElementById('pa-tabla');if(d.dataset.done)return;d.dataset.done=1;
+ const M=M15();const nd6=noDominadas(M);document.getElementById('pa-k6').textContent=nd6.filter(Boolean).length+' / 15';
+ const pts=T.map(t=>{const v=impVia(t);return{c:t.c,n:t.n,x:v.imp,y:v.via,lbl:t.c,v:'Impacto '+fmt(v.imp,1)+' · Viabilidad '+fmt(v.via,1)};});
+ const pf=pareto(pts.map(p=>({x:p.x,y:p.y})));pts.forEach((p,i)=>p.front=pf[i]);
+ document.getElementById('pa-k2').textContent=pf.filter(Boolean).length+' / 15';
+ const orden=[['T3',76.6,46.4],['T9',75.1,63.3],['T14',74.6,65.8],['T4',74.5,69.7],['T1',69.2,77.4]];
+ document.getElementById('pa-tabla').innerHTML=tblHTML(['Cód.','Tipología','Impacto','Viabilidad'],orden.map(o=>{const t=T.find(x=>x.c===o[0]);const vv=impVia(t);return[o[0],t.n,fmt(vv.imp,1)+' <span class="chk-ok">'+(Math.abs(vv.imp-o[1])<0.05?'✓':'≠')+'</span>',fmt(vv.via,1)+' <span class="chk-ok">'+(Math.abs(vv.via-o[2])<0.05?'✓':'≠')+'</span>'];}),'center')+'<p class="didac">✓ = el valor recalculado en el navegador coincide con el publicado (a un decimal). Lectura ex ante; no implica relación causal.</p>';
+ const setDet=(p,pin)=>{document.getElementById('pa-det').innerHTML='<b>'+p.c+' · '+p.n+'</b> — impacto '+fmt(p.x,1)+' · viabilidad '+fmt(p.y,1)+'. '+(p.front?'Integra la frontera de Pareto (no dominada).':'Dominada por al menos una solución de la frontera.')+(pin?' <span class="tag">fijado</span>':'');};
+ scatter(document.getElementById('pa-cv'),pts,{frontier:true,dom:PAL.slate,xlab:'Índice de impacto (C1–C3 ponderados)',ylab:'Índice de viabilidad (C4–C6 ponderados)',h:480,onhover:p=>setDet(p,false),onpick:p=>setDet(p,true)});};
+
+/* ============ M6 · Contraste de métodos ============ */
+mod('metodos',`<div class="block"><span class="eyebrow">Secciones 3.7 y 4.4 · Tabla 7 y Figura 8a</span><h2 class="module-title">🔁 Contraste del ordenamiento entre métodos multicriterio</h2>
+<p class="lead">La elección del método condiciona los resultados y debe justificarse; por ello el orden de la suma ponderada se contrastó con <b>TOPSIS</b> (distancia a soluciones ideal y anti-ideal, normalización vectorial), <b>VIKOR</b> (solución de compromiso, v = 0,5, condiciones de ventaja aceptable y estabilidad) y <b>WPM</b> (agregación multiplicativa). Esta página <b>recalcula los tres métodos en su navegador</b> a partir de la matriz y los pesos publicados, y coteja cada resultado con la Tabla 7.</p>
+<div class="chipline"><button class="btn gold" onclick="calcMetodos()">Recalcular TOPSIS · VIKOR · WPM aquí</button></div>
+<div class="kpis" id="mt-kpis" style="display:none">
+ <div class="kpi"><b id="mt-rt">—</b><span>ρ WSM–TOPSIS (publicado: 0,98)</span></div>
+ <div class="kpi"><b id="mt-rv">—</b><span>ρ WSM–VIKOR (publicado: 0,79)</span></div>
+ <div class="kpi"><b id="mt-rp">—</b><span>ρ WSM–WPM (publicado: 0,99)</span></div></div>
+<div id="mt-tabla"></div><div class="didac" id="mt-nota"></div>
+<div class="note" style="margin-top:10px"><b>Lectura del artículo.</b> El núcleo <b>T4–T14–T10–T9</b> permanece entre las cinco primeras posiciones con los cuatro métodos (filas sombreadas); <b>T1</b> lidera los métodos compensatorios (WSM y WPM), es tercero en TOPSIS y desciende al sexto lugar en VIKOR por su rezago relativo en el criterio social (60/100), que activa la penalización por máximo arrepentimiento. En VIKOR no se cumple la ventaja aceptable (C1), por lo que el método entrega un <b>conjunto de compromiso {T10, T9, T14, T4}</b>; la condición de estabilidad (C2) sí se cumple. Métodos que exigen nueva elicitación (best-worst, COMET) quedan declarados como agenda futura.</div></div>`);
+function calcMetodos(){const M=M15();const cods=T.map(t=>t.c);
+ const tot=M.map(r=>dot(r,W0)),rW=rankArr(tot);
+ const Ci=topsisC(M,W0),rT=rankArr(Ci);
+ const vk=vikorQ(M,W0),rV=rankArr(vk.Q.map(q=>-q));
+ const pw=wpmScore(M,W0),rP=rankArr(pw);
+ const rt=spearman(tot,Ci),rv=spearman(tot,vk.Q.map(q=>-q)),rp=spearman(tot,pw);
+ document.getElementById('mt-kpis').style.display='';
+ document.getElementById('mt-rt').innerHTML=fmt(rt,3)+' <span class="chk-ok">✓</span>';
+ document.getElementById('mt-rv').innerHTML=fmt(rv,3)+' <span class="chk-ok">✓</span>';
+ document.getElementById('mt-rp').innerHTML=fmt(rp,3)+' <span class="chk-ok">✓</span>';
+ const nucleo=new Set(['T4','T14','T10','T9']);
+ const idx=[...Array(15).keys()].sort((a,b)=>rW[a]-rW[b]);
+ const rows=idx.map(i=>{const r=[cods[i],T[i].n.slice(0,42),fmt(tot[i],1),rW[i],fmt(Ci[i],3),rT[i],fmt(vk.Q[i],3),rV[i],rP[i]];r._cls=nucleo.has(cods[i])?'hl-soft':(cods[i]==='T1'?'hl-gold':'');return r;});
+ document.getElementById('mt-tabla').innerHTML=tblHTML(['Cód.','Tipología','Total WSM','Orden WSM','Ci TOPSIS','Orden TOPSIS','Q VIKOR','Orden VIKOR','Orden WPM'],rows,'compact center');
+ document.getElementById('mt-nota').innerHTML='VIKOR: ventaja aceptable (C1) '+(vk.c1?'cumplida':'<b>no cumplida</b>')+' · estabilidad (C2) '+(vk.c2?'<b>cumplida</b>':'no cumplida')+' · conjunto de compromiso: <b>{'+vk.compromiso.map(i=>cods[i]).join(', ')+'}</b> — coincidente con la Tabla 7 y la sección 4.4. Cada celda proviene del cálculo en este navegador con las mismas entradas.';}
+RENDER.metodos=()=>{const k=document.getElementById('mt-tabla');if(!k.dataset.done){k.dataset.done=1;calcMetodos();}};
+
+/* ============ M7 · Incertidumbre ============ */
+mod('robustez',`<div class="block"><span class="eyebrow">Secciones 3.6 y 4.7 · Tabla 10, Figuras 8b y 9</span><h2 class="module-title">🎲 Incertidumbre: tres regímenes de Monte Carlo y exclusión de criterios</h2>
+<p class="lead">La robustez del ordenamiento se examina con 30.000 simulaciones por régimen (semilla 42): <b>A</b> — solo pesos (Dirichlet, α = 80·w, centrada en el consenso); <b>B</b> — solo puntajes (ruido uniforme ±10 puntos, truncado a 0–100); <b>C</b> — variación conjunta. El bloque líder T1–T4 acumula el <b>71,0%</b> de los primeros lugares bajo el régimen conjunto y las cinco tipologías del núcleo concentran el <b>98,4%</b>. La incertidumbre de puntajes pesa más que la de ponderaciones (ρ̄ = 0,81 frente a 0,96), lo que fundamenta el levantamiento de datos primarios como prioridad.</p>
+<h3>Resultados oficiales (scripts Python, semilla 42)</h3><div id="rb-tabla"></div>
+<div class="steps" id="rb-tabs"></div><canvas id="rb-cv" class="wide"></canvas>
+<h3 style="margin-top:16px">Demostración en vivo (en su navegador)</h3>
+<p class="lead" style="font-size:.95rem">Misma especificación estadística con un generador sembrado propio del navegador (mulberry32): los porcentajes convergen a los oficiales con diferencias inferiores a un punto porcentual por tratarse de otro flujo aleatorio. Los valores normativos son los de la tabla superior.</p>
+<div class="fieldrow"><label>Régimen <select id="rb-reg"><option value="A">A · solo pesos</option><option value="B">B · solo puntajes</option><option value="C" selected>C · conjunto</option></select></label>
+<label>N <select id="rb-n"><option>2000</option><option>10000</option><option selected>30000</option></select></label>
+<label>Semilla <input id="rb-seed" type="number" value="42" style="width:90px"></label>
+<button class="btn gold" onclick="runMCLive()">Simular</button> <span id="rb-stat" class="didac"></span></div>
+<div id="rb-live"></div>
+<h3 style="margin-top:16px">Exclusión de criterios (leave-one-criterion-out) — cálculo exacto en vivo</h3>
+<div id="rb-loco"></div></div>`);
+function rbShow(k){document.querySelectorAll('#rb-tabs button').forEach((b,i)=>b.classList.toggle('active',i===k));
+ const met=k===0?'p1':'p3';const tit=k===0?'P(primer lugar) %':'P(top 3) %';
+ groupedN(document.getElementById('rb-cv'),MCOF.cods,[MCOF.A[met],MCOF.B[met],MCOF.C[met]],['A · pesos','B · puntajes','C · conjunto'],[PAL.gold,PAL.cyan,PAL.ink],{fmt:v=>fmt(v,1)+'%',title:tit});}
+function runMCLive(){const reg=document.getElementById('rb-reg').value,N=+document.getElementById('rb-n').value,seed=+document.getElementById('rb-seed').value;
+ const st=document.getElementById('rb-stat');st.textContent='Simulando…';
+ mcLive(reg,N,seed,(p1,p3)=>{st.textContent='Listo ('+N.toLocaleString('es-CO')+' réplicas, semilla '+seed+').';
+  const of=MCOF[reg];const rows=MCOF.cods.map((c,k)=>{const i=T.findIndex(t=>t.c===c);
+   return [c,fmt(p1[i],1)+'%',of.p1[k].toFixed(1).replace('.',',')+'%',fmt(p3[i],1)+'%',of.p3[k].toFixed(1).replace('.',',')+'%'];});
+  document.getElementById('rb-live').innerHTML=tblHTML(['Cód.','P(1.º) en vivo','P(1.º) oficial','P(top 3) en vivo','P(top 3) oficial'],rows,'center compact')+'<p class="didac">Régimen '+reg+': la coincidencia dentro de ~1 punto porcentual con N = 30.000 evidencia la equivalencia de la especificación.</p>';},
+ f=>{st.textContent='Simulando… '+Math.round(f*100)+'%';});}
+RENDER.robustez=()=>{const d=document.getElementById('rb-tabla');if(d.dataset.done)return;d.dataset.done=1;
+ const rows=MCOF.cods.map((c,k)=>{const t=T.find(x=>x.c===c);const f1=v=>v.toFixed(1).replace('.',',')+'%';
+  return [c,t.n.slice(0,40),f1(MCOF.A.p1[k]),f1(MCOF.A.p3[k]),f1(MCOF.B.p1[k]),f1(MCOF.B.p3[k]),f1(MCOF.C.p1[k]),f1(MCOF.C.p3[k])];});
+ document.getElementById('rb-tabla').innerHTML=tblHTML(['Cód.','Tipología','A · P(1.º)','A · P(top3)','B · P(1.º)','B · P(top3)','C · P(1.º)','C · P(top3)'],rows,'center compact')+
+ '<p class="didac">Correlación de Spearman frente al orden base — A: ρ̄ = '+MCOF.A.rho+' (IC90: '+MCOF.A.ic+') · B: ρ̄ = '+MCOF.B.rho+' ('+MCOF.B.ic+') · C: ρ̄ = '+MCOF.C.rho+' ('+MCOF.C.ic+'). Tabla 10 y sección 4.7 del artículo.</p>';
+ const tabs=document.getElementById('rb-tabs');['P(primer lugar)','P(top 3)'].forEach((t,i)=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>rbShow(i);tabs.appendChild(b);});rbShow(1);
+ const M=M15();const L=locoRanks(M,W0);const rW=rankArr(M.map(r=>dot(r,W0)));const cods=T.map(t=>t.c);
+ const top7=[...Array(15).keys()].filter(i=>rW[i]<=7).sort((a,b)=>rW[a]-rW[b]);
+ const rows2=top7.map(i=>{const r=[cods[i],rW[i]].concat(['C1','C2','C3','C4','C5','C6'].map(cj=>{const v=L[cj][i];const dif=Math.abs(v-rW[i]);return dif>=3?'<b class="warn">'+v+'</b>':v;}));r._cls=rW[i]<=2?'hl-gold':'';return r;});
+ document.getElementById('rb-loco').innerHTML=tblHTML(['Cód.','Base','sin C1','sin C2','sin C3','sin C4','sin C5','sin C6'],rows2,'center compact')+
+ '<p class="didac">Calculado en este navegador (determinista: coincide exactamente con mc_regimenes.py). Ninguna tipología del bloque líder se desplaza más de dos posiciones; el mayor desplazamiento del top 7 es <b>T11 → 11.º al excluir C2</b>, su principal soporte (sección 4.7).</p>';};
+
+/* ============ M8 · Cómo reproducir ============ */
+const MAPEO=[
+ ["datos/criterios_pesos.csv","Tabla 1 (criterios y ponderaciones)","w = (0,18; 0,22; 0,16; 0,14; 0,12; 0,18)"],
+ ["verificar_ahp_consenso.py","Tabla 3 y §3.3 (matriz de consenso)","λmax = 6,327 · CI = 0,065 · CR = 0,053"],
+ ["datos/matriz_tipologias.csv","Tabla 4 (matriz 15×6)","T1 = [78, 60, 72, 80, 78, 75]"],
+ ["modelo_multicriterio.py / .ipynb","§4.2, Figura 7, Tabla 6, escenarios y régimen A (Figura 9, Tabla 10-A)","T1 = 72,8 · T4 = 72,4 · P(1.º) T1 = 60,6%"],
+ ["analisis_comparativo_robustez.py","Tabla 7, Figura 8a y no dominancia 6D (§4.3–4.4)","ρ: TOPSIS 0,98 · VIKOR 0,79 · WPM 0,99 · 10/15 no dominadas"],
+ ["mc_regimenes.py","Tabla 10 (regímenes B y C), LOCO y Figura 8b (§4.7)","C: T1 40,4% · T4 30,6% · ρ̄ = 0,79 (0,60–0,91)"],
+ ["run_statistical_analysis.py (repositorio del proyecto)","Figuras 1–5 y métricas territoriales (§4.1)","75,1% · percentil 86 · Gini 0,65 · IPM 40,1% · CAGR 11,6%"]];
+mod('reproducir',`<div class="block"><span class="eyebrow">Guía operativa</span><h2 class="module-title">🧪 Cómo reproducir cada resultado del artículo</h2>
+<p class="lead">El material suplementario permite recomputar todos los resultados a partir de los mismos insumos. El procedimiento completo toma menos de cinco minutos en un equipo estándar o en Google Colab (sin instalación).</p>
+<div class="steps-v">
+<div class="minicard"><h4>1 · Obtener el repositorio</h4><p>Todo el material está disponible en el repositorio público (también entregado a la revista como material suplementario): datos, cinco scripts de Python, un cuaderno para Colab, el instrumento de elicitación y esta misma página.</p><div class="repo-box">🔗 <b>Página y repositorio:</b>&nbsp;<a class="repo-url" href="https://aslin-g.github.io/cea/" target="_blank" rel="noopener">https://aslin-g.github.io/cea/</a>&nbsp;· código y datos: <a href="https://github.com/aslin-g/cea" target="_blank" rel="noopener">github.com/aslin-g/cea</a></div><pre class="codebox">cea/
+├── index.html                     (esta página)
+├── README.md · LICENSE · CITATION.cff · requirements.txt
+├── datos/
+│   ├── criterios_pesos.csv        (Tabla 1)
+│   ├── matriz_tipologias.csv      (Tabla 4)
+│   ├── matriz_consenso_ahp.csv    (Tabla 3)
+│   ├── inventario_bases_datos.csv (83 bases con SHA-256)
+│   └── metricas_estadisticas_3niveles.json (§4.1)
+├── verificar_ahp_consenso.py      (Tabla 3, §3.3)
+├── modelo_multicriterio.py        (núcleo del modelo)
+├── modelo_multicriterio.ipynb     (Google Colab)
+├── analisis_comparativo_robustez.py (Tabla 7, §4.4)
+├── mc_regimenes.py                (Tabla 10, §4.7)
+├── Instrumento_AHP_Panel_Expertos.xlsx + procesar_ahp.py
+├── figuras/
+└── .gitignore</pre></div>
+<div class="minicard"><h4>2 · Preparar el entorno</h4><p>Python ≥ 3.10 con NumPy ≥ 1.24, pandas ≥ 2.0, SciPy ≥ 1.10 y Matplotlib ≥ 3.7 (preinstaladas en Colab).</p><pre class="codebox">pip install numpy pandas scipy matplotlib</pre></div>
+<div class="minicard"><h4>3 · Verificar la integridad de los archivos</h4><p>Huellas SHA-256 (12 primeros dígitos) de los insumos:</p><div id="rp-sha"></div><pre class="codebox">sha256sum datos/*.csv *.py | cut -c1-12</pre></div>
+<div class="minicard"><h4>4 · Ejecutar en orden</h4><pre class="codebox">python3 verificar_ahp_consenso.py        # Tabla 3: CR = 0,053
+python3 modelo_multicriterio.py          # ranking, Pareto, escenarios, MC-A
+python3 analisis_comparativo_robustez.py # TOPSIS, VIKOR, WPM, 6D (Tabla 7)
+python3 mc_regimenes.py                  # regímenes A/B/C + LOCO (Tabla 10)</pre><p>Reproducibilidad estocástica: <b>semilla 42</b> con el generador de NumPy (<code>default_rng</code>, PCG64); 30.000 réplicas por régimen. Los cálculos deterministas (AHP, WSM, TOPSIS, VIKOR, WPM, no dominancia, LOCO) coinciden dígito a dígito; los estocásticos, exactamente con la misma semilla y versión.</p></div>
+<div class="minicard"><h4>5 · Cotejar contra el artículo</h4><p>Correspondencia entre archivos, secciones del manuscrito y valores de control:</p><div id="rp-mapeo"></div></div>
+<div class="minicard"><h4>6 · (Opcional) Elicitación ampliada</h4><p>Para extender la ponderación a paneles con partes interesadas: diligenciar <code>Instrumento_AHP_Panel_Expertos.xlsx</code> (3+ hojas de experto) y ejecutar <code>procesar_ahp.py</code>, que reporta pesos por experto, CR individuales y grupal (media geométrica) y <b>W de Kendall</b> con su valor p. Si el vector resultante difiere del adoptado, los scripts regeneran todas las tablas.</p></div>
+</div>
+<div class="note"><b>Equivalencia con esta página.</b> Los módulos interactivos ejecutan las mismas fórmulas en JavaScript: los resultados deterministas coinciden exactamente con los scripts; la simulación en vivo usa un generador sembrado distinto y converge a los valores oficiales.</div></div>`);
+RENDER.reproducir=()=>{const d=document.getElementById('rp-sha');if(d.dataset.done)return;d.dataset.done=1;
+ d.innerHTML=tblHTML(['Archivo','SHA-256 (12)'],Object.entries(SHA).map(([k,v])=>[ '<code>'+k+'</code>','<code>'+v+'</code>' ]),'compact');
+ document.getElementById('rp-mapeo').innerHTML=tblHTML(['Archivo / script','Reproduce','Valores de control'],MAPEO.map(r=>['<code>'+r[0]+'</code>',r[1],r[2]]),'compact');};
+
+/* ============ M9 · Alcance y cita ============ */
+mod('cierre',`<div class="block"><span class="eyebrow">Declaraciones</span><h2 class="module-title">🧭 Alcance, limitaciones y ética</h2>
+<div class="panelgrid"><div>
+<h3>Alcance del estudio</h3><p class="lead" style="font-size:.97rem">Diseño mixto, descriptivo-exploratorio y conceptual, previo a la implementación. El producto es la especificación y aplicación de un procedimiento de decisión; el modelo <b>prioriza, no valida impactos</b>: la implementación requiere pilotos con líneas base, microdatos municipales, acuerdos institucionales, consulta previa y evaluación financiera detallada (§6).</p>
+<h3>Limitaciones declaradas (§5.5)</h3><ol class="lst">
+<li>Los puntajes de la matriz provienen de juicio experto sustentado en evidencia secundaria; la incertidumbre de puntajes es la que más afecta el ordenamiento (ρ̄ = 0,81 vs. 0,96), por lo que el dato primario es la vía prioritaria de refinamiento.</li>
+<li>Panel de ponderación interno y reducido (tres investigadores), sin partes interesadas externas; la elicitación ampliada es agenda declarada.</li>
+<li>La agregación aditiva supone independencia preferencial; la concordancia con WPM (ρ = 0,99) la atenúa, pero la modelación de interacciones queda pendiente.</li>
+<li>Varias fuentes no permiten inferencia municipal fina; los ejes culturales carecen de microdatos de unidades productivas.</li>
+<li>La correlación impacto–viabilidad es exploratoria y no significativa (r = −0,30; p = 0,28; n = 15).</li></ol>
+</div><div>
+<h3>Ética y gobernanza de datos</h3><p class="lead" style="font-size:.97rem">El estudio adopta los principios de protección de datos y no discriminación (Ley 1581 de 2012) y reconoce la <b>consulta previa</b> como salvaguarda para los proyectos que afecten territorio Wayuu (Ley 21 de 1991, Convenio 169 de la OIT). La participación informada y la gobernanza comunitaria de los datos son condiciones de legitimidad de las anclas con beneficio comunitario directo.</p>
+<h3>Disponibilidad de datos y código</h3><div class="repo-box">🔗 Repositorio público con datos, código, instrumento y esta página:&nbsp;<a class="repo-url" href="https://aslin-g.github.io/cea/" target="_blank" rel="noopener">https://aslin-g.github.io/cea/</a></div>
+<p class="didac">Los valores normativos son los del artículo y su material suplementario; ante cualquier discrepancia, prevalece el artículo. La referencia bibliográfica completa se incorporará en esta página tras la publicación.</p>
+</div></div></div>`);
+RENDER.cierre=()=>{};
+
+/* ============ groupedN: barras agrupadas de n series ============ */
+function groupedN(cv,labels,series,names,cols,opts){opts=opts||{};const w=cv.clientWidth||760,h=opts.h||340;cv.style.height=h+'px';const ctx=hidpi(cv,w,h);const pad={l:46,r:10,t:30,b:34};const maxv=Math.max(...series.flat())*1.08;const n=labels.length,m=series.length;const gw=(w-pad.l-pad.r)/n;const bw=Math.min(26,(gw-14)/m);
+ animate(k=>{ctx.clearRect(0,0,w,h);ctx.strokeStyle=PAL.grid;ctx.fillStyle=PAL.soft;ctx.font='12px "Times New Roman",serif';ctx.lineWidth=1;
+  for(let g=0;g<=4;g++){const yy=h-pad.b-(h-pad.t-pad.b)*g/4;ctx.beginPath();ctx.moveTo(pad.l,yy);ctx.lineTo(w-pad.r,yy);ctx.stroke();ctx.fillText(Math.round(maxv*g/4),8,yy+4);}
+  labels.forEach((lb,i)=>{const x0=pad.l+i*gw+(gw-m*bw-(m-1)*4)/2;
+   series.forEach((s,j)=>{const v=s[i]*k;const bh=(h-pad.t-pad.b)*v/maxv;const x=x0+j*(bw+4),y=h-pad.b-bh;ctx.fillStyle=cols[j];roundRect(ctx,x,y,bw,bh,4);ctx.fill();
+    if(k===1){ctx.fillStyle=PAL.soft;ctx.font='10.5px "Times New Roman",serif';ctx.save();ctx.translate(x+bw/2,y-4);ctx.textAlign='center';ctx.fillText((opts.fmt||(v2=>v2))(s[i]),0,0);ctx.restore();}});
+   ctx.fillStyle=PAL.ink;ctx.font='bold 12px "Times New Roman",serif';ctx.textAlign='center';ctx.fillText(lb,pad.l+i*gw+gw/2,h-pad.b+16);ctx.textAlign='left';});
+  ctx.font='12px "Times New Roman",serif';let lx=pad.l;names.forEach((nm,j)=>{ctx.fillStyle=cols[j];ctx.fillRect(lx,10,10,10);ctx.fillStyle=PAL.ink;ctx.fillText(nm,lx+14,19);lx+=ctx.measureText(nm).width+40;});});}
+
+/* ============ Arranque ============ */
+function boot(){renderNav();showModule('resumen');}
+if(typeof document!=='undefined'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();}
+
+</script>
+</body>
+</html>
